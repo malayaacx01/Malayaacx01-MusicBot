@@ -69,7 +69,7 @@ Contains the fundamental building blocks of the bot.
 
 All bot commands and event handlers, organized by category.
 
-#### 📁 admin-controles/ - Administrator Commands
+#### 📁 admin/ - Administrator Commands
 
 | File              | Commands              | Description                                  |
 | ----------------- | --------------------- | -------------------------------------------- |
@@ -81,6 +81,7 @@ All bot commands and event handlers, organized by category.
 | `maintenance.py`  | `/maintenance`        | Toggle bot maintenance mode                  |
 | `restart.py`      | `/restart`, `/update` | Restart/update the bot                       |
 | `sudoers.py`      | `/addsudo`, `/rmsudo` | Manage sudo users                            |
+| `vplay_toggle.py` | `/vplaytoggle`        | Toggle video play capability globally        |
 
 **Purpose:** Commands restricted to bot owner and sudo users for administration.
 
@@ -105,7 +106,7 @@ All bot commands and event handlers, organized by category.
 
 ---
 
-#### 📁 information/ - Information Commands
+#### 📁 info/ - Information Commands
 
 | File        | Commands  | Description                                |
 | ----------- | --------- | ------------------------------------------ |
@@ -118,7 +119,7 @@ All bot commands and event handlers, organized by category.
 
 ---
 
-#### 📁 playback-controls/ - Music Control Commands
+#### 📁 playback/ - Music Control Commands
 
 | File              | Commands          | Description                       |
 | ----------------- | ----------------- | --------------------------------- |
@@ -150,7 +151,7 @@ All bot commands and event handlers, organized by category.
 
 ---
 
-#### 📁 features/ - Special Features
+#### 📁 utilities/ - Special Features
 
 | File              | Commands                  | Description                     |
 | ----------------- | ------------------------- | ------------------------------- |
@@ -162,7 +163,7 @@ All bot commands and event handlers, organized by category.
 
 ---
 
-#### 📁 misc/ - Miscellaneous Features
+#### 📁 games/ - Miscellaneous Features
 
 | File          | Commands                                                   | Description             |
 | ------------- | ---------------------------------------------------------- | ----------------------- |
@@ -176,7 +177,7 @@ All bot commands and event handlers, organized by category.
 
 - **`__init__.py`** - Auto-discovers and loads all plugin modules
   - Recursively scans subdirectories for Python files
-  - Returns module paths (e.g., `admin-controles.broadcast`)
+  - Returns module paths (e.g., `admin.broadcast`)
   - Exposes `all_modules` list for dynamic loading
 
 ---
@@ -282,7 +283,7 @@ Makes core objects accessible throughout the application.
 
 ```
 User sends /play →
-  plugins/playback-controls/play.py →
+  plugins/playback/play.py →
     helpers/_play.py (process request) →
       core/youtube.py (download media) →
         core/calls.py (stream to voice chat) →
@@ -340,13 +341,16 @@ HasiiMusicBot/
     ├── 🔌 plugins/               # Command handlers
     │   ├── __init__.py           # Plugin loader
     │   │
-    │   ├── admin-controles/      # Owner/sudo commands
+    │   ├── admin/                # Owner/sudo commands
     │   │   ├── autoleave.py      # Auto-leave configuration
     │   │   ├── broadcast.py      # Broadcast messages
     │   │   ├── eval.py           # Code execution
+    │   │   ├── gban.py           # Global ban
     │   │   ├── leave.py          # Leave groups
+    │   │   ├── maintenance.py    # Maintenance mode
     │   │   ├── restart.py        # Bot restart/update
-    │   │   └── sudoers.py        # Sudo management
+    │   │   ├── sudoers.py        # Sudo management
+    │   │   └── vplay_toggle.py   # Video play toggle
     │   │
     │   ├── events/               # Event handlers
     │   │   ├── callbacks.py      # Button callbacks
@@ -354,13 +358,13 @@ HasiiMusicBot/
     │   │   ├── misc.py           # Miscellaneous events
     │   │   └── new_chat.py       # New chat handler
     │   │
-    │   ├── information/          # Info commands
+    │   ├── info/                 # Info commands
     │   │   ├── start.py          # Start command
     │   │   ├── ping.py           # Ping command
     │   │   ├── stats.py          # Statistics
     │   │   └── active.py         # Active chats
     │   │
-    │   ├── playback-controls/    # Music controls
+    │   ├── playback/             # Music controls
     │   │   ├── play.py           # Play command
     │   │   ├── pause.py          # Pause command
     │   │   ├── resume.py         # Resume command
@@ -378,12 +382,12 @@ HasiiMusicBot/
     │   │   ├── blacklist.py      # User blocking
     │   │   └── channelplay.py    # Channel mode
     │   │
-    │   ├── features/             # Special features
+    │   ├── utilities/            # Special features
     │   │   ├── adminmention.py   # Mention admins
     │   │   ├── bots.py           # List bots
     │   │   └── groupdata.py      # Group info
     │   │
-    │   └── misc/                 # Miscellaneous
+    │   └── games/                # Miscellaneous
     │       └── dicegame.py       # Fun games
     │
     ├── 🛠️ helpers/               # Helper functions
@@ -416,13 +420,15 @@ HasiiMusicBot/
 - `locales/` - Localization files
 - `cookies/` - Cookie storage
 
-**Plugin Directories (lowercase with hyphens):**
+**Plugin Directories (lowercase):**
 
-- `admin-controles/` - Administrative controls
-- `playback-controls/` - Music playback controls
+- `admin/` - Administrative controls
+- `playback/` - Music playback controls
 - `events/` - Event handlers
-- `information/` - Information commands
+- `info/` - Information commands
 - `settings/` - Configuration commands
+- `utilities/` - Utility commands
+- `games/` - Mini games
 
 **File Naming:**
 
@@ -509,7 +515,7 @@ All sensitive data is stored in environment variables, not hardcoded:
 
 1. Start with `README.md` - Understand what the bot does
 2. Read `config.py` - See what settings are available
-3. Explore `plugins/information/` - Simple command examples
+3. Explore `plugins/info/` - Simple command examples
 4. Check `core/bot.py` - How the bot client works
 
 ### For Contributors

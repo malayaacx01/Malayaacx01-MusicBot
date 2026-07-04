@@ -8,7 +8,7 @@
 # - Exception handling and formatting
 # - Sandbox environment for code execution
 #
-# Used by: admin-controles/eval.py
+# Used by: admin/eval.py
 # ==============================================================================
 
 import os
