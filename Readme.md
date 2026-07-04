@@ -1,231 +1,258 @@
 <div align="center">
-  <div>
-  <img src="https://i.ibb.co/cKzySsgr/yy.png" alt="˹ʜᴀꜱɪɪ ᴍᴜꜱɪᴄ˼" width="300"/>
-  <img src="https://files.catbox.moe/f3i3yi.png" alt="˹ʜᴀꜱɪɪ ᴍᴜꜱɪᴄ˼" width="300"/>
-  </div>
-  
-  # 🎵 ˹ʜᴀꜱɪɪ ᴍᴜꜱɪᴄ˼
-  
-  <p><b>A Powerful Telegram Music Player Bot</b></p>
-  
-  [![Telegram](https://img.shields.io/badge/Telegram-Channel-blue?style=for-the-badge&logo=telegram)](https://t.me/TheInfinityAI)
-  [![Telegram](https://img.shields.io/badge/Telegram-Support-blue?style=for-the-badge&logo=telegram)](https://t.me/Hasindu_Lakshan)
-  
+
+<img src="https://i.ibb.co/cKzySsgr/yy.png" alt="Hasii Music" width="300"/>
+<img src="https://files.catbox.moe/f3i3yi.png" alt="Hasii Music" width="300"/>
+
+# 🎵 ˹ʜᴀꜱɪɪ ᴍᴜꜱɪᴄ˼
+
+**An Advanced & Powerful Telegram Music Player Bot Written in Python**
+
+[![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/hasindu-nagolla/HasiiMusicBot?style=for-the-badge&color=yellow)](https://github.com/hasindu-nagolla/HasiiMusicBot/stargazers)
+
+[![Telegram Channel](https://img.shields.io/badge/Telegram-Channel-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/TheInfinityAI)
+[![Telegram Support](https://img.shields.io/badge/Telegram-Support-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/Hasindu_Lakshan)
+
 </div>
 
 ---
 
-## ✨ Features
+# 📑 Table of Contents
 
-- 🎵 **High Quality Music Streaming** - Crystal clear audio with STUDIO quality
-- 📻 **Live Radio Streaming** - 50+ international and local radio stations (Request)
-- 🎧 **YouTube Support** - Play music from YouTube links or search
-- 📝 **Queue System** - Manage multiple songs in queue
-- ⚡ **Fast & Reliable** - Built with Pyrogram and PyTgCalls
-- 🎛 **Admin Controls** - Pause, resume, skip, and stop controls
-- 👥 **User Authorization** - Authorized users can control playback
-- 📊 **Statistics** - Track bot usage and performance
-- 🔄 **Auto-Leave** - Automatically leaves inactive voice chats
+- [✨ Features](#-features)
+- [🚀 Deployment](#-deployment)
+  - [✔️ Prerequisites](#️-prerequisites)
+  - [⚙️ Environment Variables](#️-environment-variables)
+  - [🛠 Installation](#-installation)
+- [📖 Commands](#-commands)
+- [🤝 Contributing](#-contributing)
+- [📞 Support & Contact](#-support--contact)
+- [🙏 Credits](#-credits)
 
 ---
 
-## 🚀 Deployment
+# ✨ Features
 
-### ✔️ Prerequisites
+- 🎵 **High-Quality Streaming** — Crystal-clear audio powered by the Opus codec.
+- 📻 **Live Radio** — Stream 50+ international and local radio stations.
+- 🎧 **YouTube Support** — Play music using YouTube URLs or search queries.
+- 📝 **Smart Queue System** — Queue multiple tracks with ease.
+- ⚡ **Fast & Reliable** — Built with Pyrogram and PyTgCalls.
+- 🎛 **Playback Controls** — Pause, Resume, Skip, Seek and Stop.
+- 👥 **Authorization System** — Only authorized users can control playback.
+- 🔄 **Auto Leave** — Automatically exits inactive voice chats.
 
-- Python 3.10+ installed
-- Deno & FFmpeg installed on your system
-- Required variables mentioned in sample.env
+---
 
-### Install Prerequisites
+# 🚀 Deployment
 
-For Ubuntu VPS:
+## ✔️ Prerequisites
+
+Install the following before running the bot:
+
+- Python **3.10+**
+- Deno
+- FFmpeg
+
+### Ubuntu / Debian
 
 ```bash
 sudo apt update
 sudo apt install -y python3 python3-pip ffmpeg curl unzip
+
 curl -fsSL https://deno.land/install.sh | sh
 ```
 
-### Verify Prerequisites
+---
 
-Run these commands and confirm they return versions:
+## ⚙️ Environment Variables
 
-```bash
-python3 --version
-deno --version
-ffmpeg -version
-```
-
-Expected:
-
-- Python version should be **3.10+**
-- Deno should print its version information
-- FFmpeg should print full build/version details
-
-If a command is not found, restart your terminal and make sure the tool is added to your system `PATH`.
-
-### Requirements
-
-- Python 3.12+
-- MongoDB Database
-- Telegram Bot Token
-- Telegram API ID & Hash
-- Pyrogram String Session
-
-### Environment Variables
-
-Create a `.env` file with the following variables:
+Create a `.env` file inside the project root.
 
 ```env
 API_ID=your_api_id
 API_HASH=your_api_hash
 BOT_TOKEN=your_bot_token
+
 MONGO_DB_URI=your_mongodb_uri
+
 LOGGER_ID=your_logger_group_id
 OWNER_ID=your_user_id
-STRING_SESSION=your_pyrogram_session
-COOKIE_URL=youtube_cookies_url (optional)
+
+STRING_SESSION=your_pyrogram_string
+
+COOKIE_URL=your_cookie_url
 ```
 
-### Installation
+| Variable | Description |
+|----------|-------------|
+| `API_ID` | Telegram API ID from https://my.telegram.org |
+| `API_HASH` | Telegram API Hash |
+| `BOT_TOKEN` | Bot Token from @BotFather |
+| `MONGO_DB_URI` | MongoDB Connection URI |
+| `LOGGER_ID` | Log Group ID |
+| `OWNER_ID` | Telegram User ID |
+| `STRING_SESSION` | Pyrogram String Session |
+| `COOKIE_URL` | *(Optional)* YouTube Cookies URL |
 
-1. **Clone the repository**
+---
+
+## 🛠 Installation
+
+### Method 1 — Standard Installation
+
+Clone the repository.
 
 ```bash
-git clone https://github.com/hasindu-nagolla/HasiiMusicBot
+git clone https://github.com/hasindu-nagolla/HasiiMusicBot.git
 cd HasiiMusicBot
 ```
 
-2. **Install dependencies**
+Install dependencies.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. **Set up environment variables**
+Create the environment file.
 
 ```bash
 cp sample.env .env
-# Edit .env with your values
 ```
 
-4. **Run the bot**
+Run the bot.
 
 ```bash
 bash start
 ```
 
-### Docker
+---
 
-You can run the bot in Docker. Build the image and run it with your `.env` file mounted.
+### Method 2 — Docker 🐳
 
-Build image:
+Build the Docker image.
 
 ```bash
 docker build -t hasiimusicbot:latest .
 ```
 
-Run with `docker run`:
+Run the container.
 
 ```bash
-docker run -d --restart unless-stopped --env-file .env \
+docker run -d \
+  --restart unless-stopped \
+  --env-file .env \
   -v ./HasiiMusic/cookies:/app/HasiiMusic/cookies \
   -v ./downloads:/app/downloads \
-  --name hasiimusicbot hasiimusicbot:latest
+  --name hasiimusicbot \
+  hasiimusicbot:latest
 ```
 
-Or use docker-compose:
+Or simply use Docker Compose.
 
 ```bash
 docker-compose up -d --build
 ```
 
+---
+
+# 📖 Commands
+
+## 👤 User Commands
+
+| Command | Description |
+|---------|-------------|
+| `/play <song/url>` | Play music using a YouTube link or search query |
+| `/radio` | Browse live radio stations |
+| `/queue` | Show current playlist |
+| `/ping` | Check bot latency |
+| `/help` | Show help menu |
 
 ---
 
-## 📖 Commands
+## 🛡 Admin Commands
 
-### User Commands
-
-- `/play` - Play a song (YouTube URL or search query)
-- `/radio` - Browse and play live radio stations
-- `/queue` - View current queue
-- `/ping` - Check bot status
-- `/help` - Show help menu
-
-### Admin Commands
-
-- `/pause` - Pause current stream
-- `/resume` - Resume paused stream
-- `/skip` - Skip current track (also `/next`)
-- `/stop` - Stop playing and clear queue (also `/end`)
-- `/seek` - Seek to specific timestamp
-- `/reload` - Reload admin cache
-
-### Sudo Commands
-
-- `/stats` - View bot statistics
-- `/broadcast` - Broadcast message to all chats
-- `/addsudo` - Add sudo user
-- `/rmsudo` - Remove sudo user
-- `/gban` - Globally ban a user across all chats
-- `/ungban` - Remove global ban
-- `/maintenance` - Toggle maintenance mode
-- `/restart` - Restart the bot
-- `/logs` - Get bot logs
+| Command | Description |
+|---------|-------------|
+| `/pause` | Pause playback |
+| `/resume` | Resume playback |
+| `/skip` | Skip current song |
+| `/next` | Skip current song |
+| `/stop` | Stop playback |
+| `/end` | Stop playback and clear queue |
+| `/seek <time>` | Seek to a specific timestamp |
+| `/reload` | Reload admin cache |
 
 ---
 
-## 🛠 Configuration
+## 👑 Sudo / Owner Commands
 
-### Audio Quality Settings
-
-The bot streams audio at **STUDIO** quality (highest available) with:
-
-- **Codec**: Opus (best quality for music)
-- **Format**: WebM container for audio downloads
-- **Sample Rate**: 48kHz
-- **Channels**: Stereo
-- **Optimization**: Max 5 concurrent downloads, 1MB chunks
-
-### Customization
-
-- Modify language files in `HasiiMusic/locales/`
-- Customize thumbnails and images in `config.py`
-- Adjust queue limits and duration in `config.py`
+| Command | Description |
+|---------|-------------|
+| `/stats` | Show bot statistics |
+| `/broadcast` | Broadcast a message |
+| `/addsudo` | Add sudo user |
+| `/rmsudo` | Remove sudo user |
+| `/gban` | Global ban a user |
+| `/ungban` | Remove global ban |
+| `/maintenance` | Toggle maintenance mode |
+| `/restart` | Restart the bot |
+| `/logs` | Fetch latest logs |
 
 ---
 
-## 📞 Support & Contact
+# 🤝 Contributing
 
-- **Developer**: Hasindu Nagolla
-- **Telegram Channel**: [@TheInfinityAI](https://t.me/TheInfinityAI)
-- **Support Group**: [@Hasindu_Lakshan](https://t.me/Hasindu_Lakshan)
-- **GitHub**: [hasindu-nagolla](https://github.com/hasindu-nagolla)
+Contributions are always welcome.
+
+1. Fork the repository.
+2. Create your feature branch.
+
+```bash
+git checkout -b feature/AmazingFeature
+```
+
+3. Commit your changes.
+
+```bash
+git commit -m "Add AmazingFeature"
+```
+
+4. Push your branch.
+
+```bash
+git push origin feature/AmazingFeature
+```
+
+5. Open a Pull Request.
+
+If you find a bug or have a feature request, feel free to open an Issue.
 
 ---
 
-## 📝 Notes
+# 📞 Support & Contact
 
-- Make sure your bot is admin in both the group and logger group
-- The assistant account will auto-join groups when needed for playback
-- Keep your `.env` file secure and never share it publicly
-- For YouTube downloads, cookies may be required for some videos
-- Radio streams are live - no duration limits or downloads needed
+| Platform | Link |
+|----------|------|
+| 👨‍💻 Developer | https://github.com/hasindu-nagolla |
+| 📢 Telegram Channel | https://t.me/TheInfinityAI |
+| 💬 Telegram Support | https://t.me/Hasindu_Lakshan |
 
 ---
 
-## 🙏 Credits
+# 🙏 Credits
 
-Special thanks to [AnonymousX1025](https://github.com/AnonymousX1025) for the original inspiration.
+- ❤️ Inspired by **AnonymousX1025**
+- 💙 Built using **Pyrogram**
+- 🎙 Voice streaming powered by **PyTgCalls**
 
 ---
 
 <div align="center">
-  
-  ### Made with ❤️ by Hasindu Nagolla
-  
-  **© 2025 ˹ʜᴀꜱɪɪ ᴍᴜꜱɪᴄ˼. All rights reserved.**
-  
+
+### ⭐ If you like this project, don't forget to leave a star on GitHub!
+
+Made with ❤️ by **Hasindu Nagolla**
+
 </div>
