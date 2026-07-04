@@ -1,15 +1,20 @@
 <div align="center">
 
-<img src="https://i.ibb.co/cKzySsgr/yy.png" alt="Hasii Music" width="300"/>
-<img src="https://files.catbox.moe/f3i3yi.png" alt="Hasii Music" width="300"/>
+<img src="https://i.ibb.co/cKzySsgr/yy.png" alt="Hasii Music" width="280"/>
 
 # 🎵 ˹ʜᴀꜱɪɪ ᴍᴜꜱɪᴄ˼
 
-**An Advanced & Powerful Telegram Music Player Bot Written in Python**
+### A Modern Telegram Music Bot for High-Quality Voice Chat Streaming
 
-[![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/hasindu-nagolla/HasiiMusicBot?style=for-the-badge&color=yellow)](https://github.com/hasindu-nagolla/HasiiMusicBot/stargazers)
+An open-source Telegram music bot built with **Python**, **Pyrogram**, **PyTgCalls**, and **FFmpeg**, delivering fast, reliable, and high-quality audio streaming directly to Telegram voice chats.
+
+<br>
+
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-success?style=for-the-badge)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/hasindu-nagolla/HasiiMusicBot?style=for-the-badge)](https://github.com/hasindu-nagolla/HasiiMusicBot/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/hasindu-nagolla/HasiiMusicBot?style=for-the-badge)](https://github.com/hasindu-nagolla/HasiiMusicBot/network/members)
+[![GitHub Issues](https://img.shields.io/github/issues/hasindu-nagolla/HasiiMusicBot?style=for-the-badge)](https://github.com/hasindu-nagolla/HasiiMusicBot/issues)
 
 [![Telegram Channel](https://img.shields.io/badge/Telegram-Channel-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/TheInfinityAI)
 [![Telegram Support](https://img.shields.io/badge/Telegram-Support-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/Hasindu_Lakshan)
@@ -18,98 +23,238 @@
 
 ---
 
+## 📖 About
+
+**˹ʜᴀꜱɪɪ ᴍᴜꜱɪᴄ˼** is a powerful and modern Telegram music bot built for seamless voice chat streaming. It enables users to play music directly in Telegram voice chats using YouTube links, search queries, and live radio stations while offering administrators complete control over playback.
+
+Designed with performance, stability, and simplicity in mind, the project combines modern asynchronous technologies to provide a fast, reliable, and highly customizable music streaming experience. Whether you're hosting a small community or managing a large Telegram group, Hasii Music is built to deliver consistent performance with minimal configuration.
+
+---
+
 # 📑 Table of Contents
 
+- [📖 About](#-about)
+- [⭐ Why Hasii Music?](#-why-hasii-music)
 - [✨ Features](#-features)
-- [🚀 Deployment](#-deployment)
-  - [✔️ Prerequisites](#️-prerequisites)
-  - [⚙️ Environment Variables](#️-environment-variables)
-  - [🛠 Installation](#-installation)
+- [🏗 Tech Stack](#-tech-stack)
+- [📋 Requirements](#-requirements)
+- [🚀 Quick Start](#-quick-start)
+- [⚙️ Environment Variables](#️-environment-variables)
+- [🛠 Installation](#️-installation)
 - [📖 Commands](#-commands)
+- [📂 Project Structure](#-project-structure)
 - [🤝 Contributing](#-contributing)
-- [📞 Support & Contact](#-support--contact)
+- [📞 Support](#-support)
 - [🙏 Credits](#-credits)
+- [📄 License](#-license)
+
+---
+
+# ⭐ Why Hasii Music?
+
+Choosing the right Telegram music bot shouldn't mean sacrificing performance, reliability, or ease of deployment. Hasii Music is designed with developers and communities in mind, providing a clean architecture, modern technologies, and powerful features while remaining simple to deploy and maintain.
+
+### Highlights
+
+- 🚀 Fast and lightweight architecture
+- 🎵 High-quality voice chat streaming
+- 🎧 YouTube search and direct URL playback
+- 📻 Built-in live radio support
+- 📝 Smart queue management
+- 🛡 Powerful administrator controls
+- 👥 User authorization system
+- 🔄 Automatic voice chat cleanup
+- 🐳 Docker and Docker Compose support
+- ⚙️ Environment-based configuration
+- 📂 Modular and maintainable codebase
+- ❤️ Open-source under the MIT License
 
 ---
 
 # ✨ Features
 
-- 🎵 **High-Quality Streaming** — Crystal-clear audio powered by the Opus codec.
-- 📻 **Live Radio** — Stream 50+ international and local radio stations.
-- 🎧 **YouTube Support** — Play music using YouTube URLs or search queries.
-- 📝 **Smart Queue System** — Queue multiple tracks with ease.
-- ⚡ **Fast & Reliable** — Built with Pyrogram and PyTgCalls.
-- 🎛 **Playback Controls** — Pause, Resume, Skip, Seek and Stop.
-- 👥 **Authorization System** — Only authorized users can control playback.
-- 🔄 **Auto Leave** — Automatically exits inactive voice chats.
+### 🎵 High-Quality Audio Streaming
+
+Experience smooth and crystal-clear music playback optimized for Telegram voice chats using the Opus codec and FFmpeg.
+
+### 🎧 YouTube Integration
+
+Play music instantly from:
+
+- YouTube links
+- Search queries
+- Supported playlists
+
+### 📻 Live Radio Streaming
+
+Access and stream a collection of online radio stations directly within Telegram voice chats.
+
+### 📝 Smart Queue Management
+
+Manage playlists effortlessly with a built-in queue system.
+
+- Add songs
+- View queue
+- Skip tracks
+- Clear queue
+
+### ⚡ Optimized Performance
+
+Built with asynchronous libraries for efficient resource usage and responsive performance.
+
+### 🎛 Playback Controls
+
+Complete playback management with support for:
+
+- Play
+- Pause
+- Resume
+- Skip
+- Stop
+- Seek
+
+### 👥 Authorization System
+
+Restrict playback controls to:
+
+- Chat administrators
+- Authorized users
+- Bot owner
+- Sudo users
+
+### 🔄 Automatic Voice Chat Cleanup
+
+Automatically detects inactive voice chats and leaves them to conserve server resources.
+
+### 🐳 Docker Ready
+
+Deploy effortlessly using Docker or Docker Compose for a consistent production environment.
+
+### 🔧 Easy Configuration
+
+Configure the bot entirely through environment variables without modifying the source code.
 
 ---
 
-# 🚀 Deployment
+# 🏗 Tech Stack
 
-## ✔️ Prerequisites
-
-Install the following before running the bot:
-
-- Python **3.10+**
-- Deno
-- FFmpeg
-
-### Ubuntu / Debian
-
-```bash
-sudo apt update
-sudo apt install -y python3 python3-pip ffmpeg curl unzip
-
-curl -fsSL https://deno.land/install.sh | sh
-```
+| Category | Technology |
+|-----------|------------|
+| Language | Python 3.10+ |
+| Telegram Framework | Pyrogram |
+| Voice Chat | PyTgCalls |
+| Database | MongoDB |
+| Media Processing | FFmpeg |
+| Runtime | Deno |
+| Containerization | Docker & Docker Compose |
+| Version Control | Git |
 
 ---
 
-## ⚙️ Environment Variables
+# 📋 Requirements
 
-Create a `.env` file inside the project root.
+Before deploying **˹ʜᴀꜱɪɪ ᴍᴜꜱɪᴄ˼**, ensure your system meets the following requirements.
 
-```env
-API_ID=your_api_id
-API_HASH=your_api_hash
-BOT_TOKEN=your_bot_token
-
-MONGO_DB_URI=your_mongodb_uri
-
-LOGGER_ID=your_logger_group_id
-OWNER_ID=your_user_id
-
-STRING_SESSION=your_pyrogram_string
-
-COOKIE_URL=your_cookie_url
-```
-
-| Variable | Description |
-|----------|-------------|
-| `API_ID` | Telegram API ID from https://my.telegram.org |
-| `API_HASH` | Telegram API Hash |
-| `BOT_TOKEN` | Bot Token from @BotFather |
-| `MONGO_DB_URI` | MongoDB Connection URI |
-| `LOGGER_ID` | Log Group ID |
-| `OWNER_ID` | Telegram User ID |
-| `STRING_SESSION` | Pyrogram String Session |
-| `COOKIE_URL` | *(Optional)* YouTube Cookies URL |
+| Software | Version |
+|-----------|---------|
+| Python | 3.10 or higher |
+| FFmpeg | Latest |
+| Deno | Latest |
+| MongoDB | Atlas or Self-hosted |
+| Git | Latest |
 
 ---
 
-## 🛠 Installation
-
-### Method 1 — Standard Installation
+# 🚀 Quick Start
 
 Clone the repository.
 
 ```bash
 git clone https://github.com/hasindu-nagolla/HasiiMusicBot.git
+```
+
+Move into the project directory.
+
+```bash
 cd HasiiMusicBot
 ```
 
-Install dependencies.
+Install the required dependencies.
+
+```bash
+pip install -r requirements.txt
+```
+
+Create your environment configuration.
+
+```bash
+cp sample.env .env
+```
+
+Update the values inside `.env`.
+
+Start the bot.
+
+```bash
+bash start
+```
+
+---
+
+# ⚙️ Environment Variables
+
+Create a `.env` file in the project's root directory.
+
+```env
+# Telegram API
+API_ID=
+API_HASH=
+BOT_TOKEN=
+
+# MongoDB
+MONGO_DB_URI=
+
+# Bot Configuration
+OWNER_ID=
+LOGGER_ID=
+
+# Assistant Account
+STRING_SESSION=
+
+# Optional
+COOKIE_URL=
+```
+
+| Variable | Description |
+|-----------|-------------|
+| `API_ID` | Telegram API ID obtained from **my.telegram.org** |
+| `API_HASH` | Telegram API Hash |
+| `BOT_TOKEN` | Bot Token received from **@BotFather** |
+| `MONGO_DB_URI` | MongoDB connection URI |
+| `OWNER_ID` | Telegram User ID of the bot owner |
+| `LOGGER_ID` | Group ID used for bot logs |
+| `STRING_SESSION` | Pyrogram String Session for the assistant account |
+| `COOKIE_URL` | YouTube cookies URL |
+
+---
+
+# 🛠 Installation
+
+## Local Installation
+
+Clone the repository.
+
+```bash
+git clone https://github.com/hasindu-nagolla/HasiiMusicBot.git
+```
+
+Enter the project directory.
+
+```bash
+cd HasiiMusicBot
+```
+
+Install Python dependencies.
 
 ```bash
 pip install -r requirements.txt
@@ -121,7 +266,9 @@ Create the environment file.
 cp sample.env .env
 ```
 
-Run the bot.
+Configure all required environment variables.
+
+Start the bot.
 
 ```bash
 bash start
@@ -129,7 +276,7 @@ bash start
 
 ---
 
-### Method 2 — Docker 🐳
+## Docker
 
 Build the Docker image.
 
@@ -149,10 +296,32 @@ docker run -d \
   hasiimusicbot:latest
 ```
 
-Or simply use Docker Compose.
+---
+
+## Docker Compose
+
+Deploy using Docker Compose.
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
+```
+
+View container logs.
+
+```bash
+docker compose logs -f
+```
+
+Stop the services.
+
+```bash
+docker compose down
+```
+
+Restart the services.
+
+```bash
+docker compose restart
 ```
 
 ---
@@ -163,11 +332,11 @@ docker-compose up -d --build
 
 | Command | Description |
 |---------|-------------|
-| `/play <song/url>` | Play music using a YouTube link or search query |
-| `/radio` | Browse live radio stations |
-| `/queue` | Show current playlist |
-| `/ping` | Check bot latency |
-| `/help` | Show help menu |
+| `/play <song/url>` | Play a song from a YouTube URL or search query |
+| `/radio` | Browse available radio stations |
+| `/queue` | Display the current music queue |
+| `/ping` | Check the bot's latency and status |
+| `/help` | Show the help menu |
 
 ---
 
@@ -175,84 +344,124 @@ docker-compose up -d --build
 
 | Command | Description |
 |---------|-------------|
-| `/pause` | Pause playback |
+| `/pause` | Pause the current playback |
 | `/resume` | Resume playback |
-| `/skip` | Skip current song |
-| `/next` | Skip current song |
+| `/skip` | Skip the current track |
+| `/next` | Play the next track in the queue |
 | `/stop` | Stop playback |
-| `/end` | Stop playback and clear queue |
+| `/end` | Stop playback and clear the queue |
 | `/seek <time>` | Seek to a specific timestamp |
-| `/reload` | Reload admin cache |
+| `/reload` | Reload administrator cache |
 
 ---
 
-## 👑 Sudo / Owner Commands
+## 👑 Owner Commands
 
 | Command | Description |
 |---------|-------------|
-| `/stats` | Show bot statistics |
-| `/broadcast` | Broadcast a message |
-| `/addsudo` | Add sudo user |
-| `/rmsudo` | Remove sudo user |
-| `/gban` | Global ban a user |
-| `/ungban` | Remove global ban |
-| `/maintenance` | Toggle maintenance mode |
+| `/stats` | Display bot statistics |
+| `/broadcast` | Broadcast a message to all served chats |
+| `/addsudo` | Add a sudo user |
+| `/rmsudo` | Remove a sudo user |
+| `/gban` | Globally ban a user |
+| `/ungban` | Remove a global ban |
+| `/maintenance` | Enable or disable maintenance mode |
 | `/restart` | Restart the bot |
-| `/logs` | Fetch latest logs |
+| `/logs` | Retrieve the latest bot logs |
+
+---
+
+# 📂 Project Structure
+
+```text
+HasiiMusicBot/
+├── HasiiMusic/
+│   ├── __init__.py
+│   ├── __main__.py
+│   ├── config.py
+│   ├── core/
+│   ├── database/
+│   ├── decorators/
+│   ├── helpers/
+│   ├── modules/
+│   ├── plugins/
+│   ├── utils/
+│   └── cookies/
+│
+├── downloads/
+├── logs/
+├── sample.env
+├── requirements.txt
+├── Dockerfile
+├── docker-compose.yml
+├── start
+├── LICENSE
+└── README.md
+```
 
 ---
 
 # 🤝 Contributing
 
-Contributions are always welcome.
+Contributions are welcome and greatly appreciated.
 
-1. Fork the repository.
-2. Create your feature branch.
+Whether you're fixing bugs, improving documentation, optimizing performance, or adding new features, your contributions help make **˹ʜᴀꜱɪɪ ᴍᴜꜱɪᴄ˼** better for everyone.
 
-```bash
-git checkout -b feature/AmazingFeature
-```
-
-3. Commit your changes.
-
-```bash
-git commit -m "Add AmazingFeature"
-```
-
-4. Push your branch.
-
-```bash
-git push origin feature/AmazingFeature
-```
-
-5. Open a Pull Request.
-
-If you find a bug or have a feature request, feel free to open an Issue.
+Please read the [CONTRIBUTING.md](CONTRIBUTING.md) guide before opening an issue or submitting a pull request.
 
 ---
 
-# 📞 Support & Contact
+# 📞 Support
+
+Need help with deployment or encountered an issue?
+
+Feel free to reach out through the following platforms.
 
 | Platform | Link |
 |----------|------|
-| 👨‍💻 Developer | https://github.com/hasindu-nagolla |
+| 💻 GitHub Repository | https://github.com/hasindu-nagolla/HasiiMusicBot |
 | 📢 Telegram Channel | https://t.me/TheInfinityAI |
 | 💬 Telegram Support | https://t.me/Hasindu_Lakshan |
+
+If you discover a bug, please open a GitHub Issue with detailed information so it can be reproduced and fixed quickly.
 
 ---
 
 # 🙏 Credits
 
-- ❤️ Inspired by **AnonymousX1025**
-- 💙 Built using **Pyrogram**
-- 🎙 Voice streaming powered by **PyTgCalls**
+This project would not have been possible without the amazing open-source community.
+
+Special thanks to:
+
+- **AnonymousX1025** — Inspiration for the original project.
+- **Pyrogram** — Telegram MTProto framework.
+- **PyTgCalls** — Telegram voice chat streaming library.
+- **FFmpeg** — Audio processing and transcoding.
+
+Thank you to everyone who has contributed through code, bug reports, feature suggestions, testing, and community support.
+
+---
+
+# 📄 License
+
+This project is licensed under the **MIT License**.
+
+You are free to use, modify, and distribute this software in accordance with the terms of the license.
+
+For more information, see the [LICENSE](LICENSE) file.
 
 ---
 
 <div align="center">
 
-### ⭐ If you like this project, don't forget to leave a star on GitHub!
+## ⭐ Support the Project
 
-Made with ❤️ by **Hasindu Nagolla**
+If you find **˹ʜᴀꜱɪɪ ᴍᴜꜱɪᴄ˼** useful, consider giving this repository a ⭐ on GitHub.
+
+Your support helps increase the project's visibility and encourages future development.
+
+<br>
+
+**Made with ❤️ by <a href="https://github.com/hasindu-nagolla">Hasindu Nagolla</a>**
 
 </div>
