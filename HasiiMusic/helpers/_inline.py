@@ -102,7 +102,6 @@ class Inline:
                 [
                     self.ikb(text="ʙʟ-ᴄʜᴀᴛ", callback_data="help_blchat"),
                     self.ikb(text="ʙʟ-ᴜꜱᴇʀ", callback_data="help_bluser"),
-                    self.ikb(text="ɢ-ʙᴀɴ", callback_data="help_gban"),
                 ],
                 [
                     self.ikb(text="ʟᴏᴏᴘ", callback_data="help_loop"),

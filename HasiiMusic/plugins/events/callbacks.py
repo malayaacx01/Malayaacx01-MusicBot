@@ -420,7 +420,6 @@ async def _help(_, query: types.CallbackQuery):
         "broadcast": query.lang["help_sudo"],  # Broadcast is sudo feature
         "blchat": query.lang["help_blchat"],
         "bluser": query.lang["help_bluser"],
-        "gban": query.lang["help_gban"],
         "loop": query.lang["help_loop"],
         "play": query.lang["help_play"],
         "queue": query.lang["help_queue"],

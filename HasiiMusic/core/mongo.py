@@ -67,7 +67,6 @@ class MongoDB:
         self.cache = self.db.cache
         self.logger = False
         self.maintenance = False  # Maintenance mode status
-        self.gbanned_users = []  # Globally banned users
         self.vplay_enabled = config.VIDEO_PLAY
 
         self.assistant = {}
@@ -329,39 +328,7 @@ class MongoDB:
             upsert=True,
         )
 
-    # GLOBAL BAN METHODS
-    async def add_gban(self, user_id: int) -> None:
-        """Add user to global ban list."""
-        await self.cache.update_one(
-            {"_id": "gbanned_users"},
-            {"$addToSet": {"user_ids": user_id}},
-            upsert=True,
-        )
-        if not hasattr(self, 'gbanned_users'):
-            self.gbanned_users = []
-        if user_id not in self.gbanned_users:
-            self.gbanned_users.append(user_id)
 
-    async def del_gban(self, user_id: int) -> None:
-        """Remove user from global ban list."""
-        await self.cache.update_one(
-            {"_id": "gbanned_users"},
-            {"$pull": {"user_ids": user_id}},
-        )
-        if hasattr(self, 'gbanned_users') and user_id in self.gbanned_users:
-            self.gbanned_users.remove(user_id)
-
-    async def get_gbanned(self) -> list[int]:
-        """Get list of globally banned users."""
-        if not hasattr(self, 'gbanned_users'):
-            doc = await self.cache.find_one({"_id": "gbanned_users"})
-            self.gbanned_users = doc.get("user_ids", []) if doc else []
-        return self.gbanned_users
-    
-    async def is_gbanned(self, user_id: int) -> bool:
-        """Check if user is globally banned."""
-        gbanned = await self.get_gbanned()
-        return user_id in gbanned
 
     # LOGGER METHODS
     async def is_logger(self) -> bool:
