@@ -145,7 +145,7 @@ Configure the bot entirely through environment variables without modifying the s
 | Voice Chat | PyTgCalls |
 | Database | MongoDB |
 | Media Processing | FFmpeg |
-| Runtime | Deno |
+| Runtime | Deno & Ballerina |
 | Containerization | Docker & Docker Compose |
 | Version Control | Git |
 
@@ -160,8 +160,25 @@ Before deploying **˹ʜᴀꜱɪɪ ᴍᴜꜱɪᴄ˼**, ensure your system meets t
 | Python | 3.10 or higher |
 | FFmpeg | Latest |
 | Deno | Latest |
+| Ballerina | 2201.9.0 (Swan Lake) or higher |
 | MongoDB | Atlas or Self-hosted |
 | Git | Latest |
+
+### 🔧 Installing Prerequisites (Linux/Ubuntu)
+
+Before starting, install the required runtimes:
+
+```bash
+# Install FFmpeg
+sudo apt update && sudo apt install ffmpeg -y
+
+# Install Deno
+curl -fsSL https://deno.land/x/install/install.sh | sh
+
+# Install Ballerina (Swan Lake)
+wget -O ballerina.deb https://dist.ballerina.io/downloads/2201.9.0/ballerina-2201.9.0-swan-lake-linux-x64.deb
+sudo dpkg -i ballerina.deb
+```
 
 ---
 
@@ -193,7 +210,15 @@ cp sample.env .env
 
 Update the values inside `.env`.
 
-Start the bot.
+Start the Ballerina microservice API in a background session (e.g., using `tmux`).
+
+```bash
+tmux new -s StatsAPI
+bal run stats_api.bal
+# Detach the session using Ctrl+B then D
+```
+
+Start the bot in another session.
 
 ```bash
 bash start
@@ -267,6 +292,14 @@ cp sample.env .env
 ```
 
 Configure all required environment variables.
+
+Start the Ballerina microservice API in a background session.
+
+```bash
+tmux new -s StatsAPI
+bal run stats_api.bal
+# Detach the session using Ctrl+B then D
+```
 
 Start the bot.
 
