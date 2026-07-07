@@ -105,12 +105,8 @@ def playlist_to_queue(chat_id: int, tracks: list) -> str:
         [
             "play",
             "playforce",
-            "cplay",
-            "cplayforce",
             "vplay",
             "vplayforce",
-            "cvplay",
-            "cvplayforce",
         ]
     )
     & filters.group
@@ -123,7 +119,6 @@ async def play_hndlr(
     m: types.Message,
     force: bool = False,
     url: str = None,
-    cplay: bool = False,
     video: bool = False,
 ) -> None:
     # Auto-delete command message
@@ -132,76 +127,7 @@ async def play_hndlr(
     except Exception:
         pass
     
-    # Handle channel play mode
     chat_id = m.chat.id
-    message_chat_id = m.chat.id  # Store original group chat ID for thumbnail
-    if cplay:
-        channel_id = await db.get_cmode(m.chat.id)
-        if channel_id is None:
-            return await safe_reply(m,
-                "<blockquote>❌ Channel play is not enabled.\n\n"
-                "To enable for linked channel:\n"
-                "`/channelplay linked`\n\n"
-                "To enable for any channel:\n"
-                "`/channelplay [channel_id]`</blockquote>"
-            )
-        try:
-            chat = await app.get_chat(channel_id)
-            chat_id = channel_id
-        except:
-            await db.set_cmode(m.chat.id, None)
-            return await safe_reply(m,
-                "<blockquote>❌ ꜰᴀɪʟᴇᴅ ᴛᴏ ɢᴇᴛ ᴄʜᴀɴɴᴇʟ.\n\n"
-                "ᴍᴀᴋᴇ ꜱᴜʀᴇ ɪ'ᴍ ᴀᴅᴍɪɴ ɪɴ ᴛʜᴇ ᴄʜᴀɴɴᴇʟ ᴀɴᴅ ᴄʜᴀɴɴᴇʟ ᴘʟᴀʏ ɪꜱ ꜱᴇᴛ ᴄᴏʀʀᴇᴄᴛʟʏ.</blockquote>"
-            )
-        
-        # Auto-join assistant to channel if not already a member
-        client = await db.get_client(channel_id)
-        try:
-            # Check if assistant is in the channel
-            await app.get_chat_member(channel_id, client.id)
-        except Exception:
-            # Assistant not in channel, try to join
-            try:
-                # For channels, we need an invite link
-                if chat.username:
-                    invite_link = chat.username
-                else:
-                    # Try to get/create invite link
-                    try:
-                        invite_link = chat.invite_link
-                        if not invite_link:
-                            invite_link = await app.export_chat_invite_link(channel_id)
-                    except Exception:
-                        return await safe_reply(m,
-                            f"<blockquote>❌ ᴀꜱꜱɪꜱᴛᴀɴᴛ ɴᴏᴛ ɪɴ ᴄʜᴀɴɴᴇʟ!\n\n"
-                            f"ᴘʟᴇᴀꜱᴇ ᴀᴅᴅ @{client.username if client.username else client.mention} "
-                            f"ᴛᴏ ᴛʜᴇ ᴄʜᴀɴɴᴇʟ ᴀꜱ ᴀᴅᴍɪɴ ᴡɪᴛʜ ᴠᴏɪᴄᴇ ᴄʜᴀᴛ ᴘᴇʀᴍɪꜱꜱɪᴏɴꜱ.</blockquote>"
-                        )
-                
-                # Show joining message
-                join_msg = await safe_reply(m,
-                    f"<blockquote>🔄 ᴊᴏɪɴɪɴɢ ᴀꜱꜱɪꜱᴛᴀɴᴛ ᴛᴏ ᴄʜᴀɴɴᴇʟ...</blockquote>"
-                )
-                
-                # Try to join the channel
-                await client.join_chat(invite_link)
-                await asyncio.sleep(1)  # Give it time to fully join
-                
-                # Delete joining message
-                try:
-                    await join_msg.delete()
-                except:
-                    pass
-                    
-            except Exception as e:
-                error_str = str(e)
-                return await safe_reply(m,
-                    f"<blockquote>❌ ꜰᴀɪʟᴇᴅ ᴛᴏ ᴊᴏɪɴ ᴀꜱꜱɪꜱᴛᴀɴᴛ ᴛᴏ ᴄʜᴀɴɴᴇʟ!\n\n"
-                    f"ᴘʟᴇᴀꜱᴇ ᴍᴀɴᴜᴀʟʟʏ ᴀᴅᴅ @{client.username if client.username else client.mention} "
-                    f"ᴛᴏ ᴛʜᴇ ᴄʜᴀɴɴᴇʟ ᴀꜱ ᴀᴅᴍɪɴ ᴡɪᴛʜ ᴠᴏɪᴄᴇ ᴄʜᴀᴛ ᴘᴇʀᴍɪꜱꜱɪᴏɴꜱ.\n\n"
-                    f"Error: {error_str}</blockquote>"
-                )
 
     # Select emoji for this play session
     play_emoji = m.lang["play_emoji"]
@@ -346,6 +272,8 @@ async def play_hndlr(
             video=getattr(file, "video", False),
         )
         if not file.file_path:
+            if not await db.get_call(chat_id):
+                queue.clear(chat_id)
             await safe_edit(
                 sent,
                 "<blockquote>❌ Failed to download media.\n\n"
@@ -354,14 +282,13 @@ async def play_hndlr(
                 "• Video is region-blocked or private\n"
                 "• Age-restricted content (requires cookies)</blockquote>"
             )
+            return
 
     try:
-        # Pass message_chat_id only if it's different from chat_id (channel play mode)
         await tune.play_media(
             chat_id=chat_id, 
             message=sent, 
-            media=file, 
-            message_chat_id=message_chat_id if chat_id != message_chat_id else None
+            media=file
         )
         # React with emoji on successful play
         try:
@@ -372,6 +299,8 @@ async def play_hndlr(
             pass
     except Exception as e:
         error_msg = str(e)
+        if not await db.get_call(chat_id):
+            queue.clear(chat_id)
         if "bot" in error_msg.lower() or "sign in" in error_msg.lower():
             await safe_edit(
                 sent,

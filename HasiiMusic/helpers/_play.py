@@ -54,9 +54,8 @@ def checkUB(play):
         force = command.endswith("force") or (
             len(m.command) > 1 and "-f" in m.command[1]
         )
-        cplay = command.startswith("c")
 
-        video_requested = command.startswith("v") or command.startswith("cv")
+        video_requested = command.startswith("v")
         if video_requested and not await db.get_vplay_enabled():
             await safe_reply(m.lang["play_video_disabled"])
             return
@@ -224,6 +223,6 @@ def checkUB(play):
         except:
             pass
 
-        return await play(_, m, force, url, cplay, video)
+        return await play(_, m, force, url, video)
 
     return wrapper

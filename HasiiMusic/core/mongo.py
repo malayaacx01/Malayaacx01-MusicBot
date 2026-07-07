@@ -66,7 +66,6 @@ class MongoDB:
         self.notified = []
         self.cache = self.db.cache
         self.logger = False
-        self.maintenance = False  # Maintenance mode status
         self.vplay_enabled = config.VIDEO_PLAY
 
         self.assistant = {}
@@ -292,23 +291,6 @@ class MongoDB:
             self.lang[chat_id] = doc["lang"] if doc else "en"
         return self.lang[chat_id]
 
-    # MAINTENANCE MODE METHODS
-    async def set_maintenance(self, status: bool) -> None:
-        """Enable or disable maintenance mode."""
-        await self.cache.update_one(
-            {"_id": "maintenance"},
-            {"$set": {"status": status}},
-            upsert=True,
-        )
-        self.maintenance = status
-
-    async def get_maintenance(self) -> bool:
-        """Check if maintenance mode is enabled."""
-        if not hasattr(self, 'maintenance'):
-            doc = await self.cache.find_one({"_id": "maintenance"})
-            self.maintenance = doc.get("status", False) if doc else False
-        return self.maintenance
-
     # VPLAY TOGGLE METHODS
     async def get_vplay_enabled(self) -> bool:
         """Check if /vplay commands are enabled."""
@@ -348,37 +330,7 @@ class MongoDB:
             upsert=True,
         )
 
-    # CHANNEL PLAY METHODS
-    async def get_cmode(self, chat_id: int) -> int | None:
-        """Get channel play mode for a chat."""
-        doc = await self.cache.find_one({"_id": f"cplay_{chat_id}"})
-        return doc.get("channel_id") if doc else None
 
-    async def set_cmode(self, chat_id: int, channel_id: int | None) -> None:
-        """Set or remove channel play mode for a chat."""
-        if channel_id is None:
-            await self.cache.delete_one({"_id": f"cplay_{chat_id}"})
-        else:
-            await self.cache.update_one(
-                {"_id": f"cplay_{chat_id}"},
-                {"$set": {"channel_id": channel_id}},
-                upsert=True,
-            )
-    
-    async def get_group_for_channel(self, channel_id: int) -> int | None:
-        """Reverse lookup: Find which group has this channel set for channel play.
-        
-        When audio streams to a channel, we need to know which group initiated it
-        so we can send control messages to the group instead of the channel.
-        """
-        doc = await self.cache.find_one({"channel_id": channel_id})
-        if doc and doc.get("_id", "").startswith("cplay_"):
-            group_id_str = doc["_id"].replace("cplay_", "")
-            try:
-                return int(group_id_str)
-            except ValueError:
-                return None
-        return None
 
     # AUTO LEAVE METHODS
     async def get_autoleave(self, chat_id: int) -> bool:

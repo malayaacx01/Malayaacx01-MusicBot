@@ -461,7 +461,8 @@ class YouTube:
                 # Audio mode: favor m4a/opus for best compatibility
                 ydl_opts = {
                     **base_opts,
-                    "format": "bestaudio[ext=m4a]/bestaudio[acodec=opus]/bestaudio/best",
+                    # "format": "bestaudio[ext=m4a]/bestaudio[acodec=opus]/bestaudio/best",
+                    "format": "bestaudio/best",
                     "postprocessors": [],
                 }
 

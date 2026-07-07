@@ -84,11 +84,8 @@ All bot commands and event handlers, organized by category.
 | ----------------- | --------------------- | -------------------------------------------- |
 | `autoleave.py`    | `/autoleave`          | Configure auto-leave settings for assistants |
 | `broadcast.py`    | `/broadcast`          | Send messages to all bot users/chats         |
-| `eval.py`         | `/eval`, `/sh`        | Execute Python/shell commands (owner only)   |
-
 | `leave.py`        | `/leave`, `/leaveall` | Make assistants leave groups                 |
-| `maintenance.py`  | `/maintenance`        | Toggle bot maintenance mode                  |
-| `restart.py`      | `/restart`, `/update` | Restart/update the bot                       |
+| `restart.py`      | `/restart`            | Restart the bot                              |
 | `sudoers.py`      | `/addsudo`, `/rmsudo` | Manage sudo users                            |
 | `vplay_toggle.py` | `/vplaytoggle`        | Toggle video play capability globally        |
 
@@ -98,7 +95,6 @@ All bot commands and event handlers, organized by category.
 - **`/leave`** - Make bot and assistant leave the current chat immediately
 - **`/leaveall`** - Make all assistants leave all inactive groups (excludes active calls and logger chat)
 - **`/restart`** - Clear cache and restart bot process
-- **`/update`** - Pull latest code from git, update dependencies, and restart bot
 
 ---
 
@@ -154,7 +150,6 @@ All bot commands and event handlers, organized by category.
 | ---------------- | ---------------------------- | ---------------------------- |
 | `auth.py`        | `/auth`, `/unauth`           | Manage authorized users      |
 | `blacklist.py`   | `/blacklist`, `/unblacklist` | Block/unblock users/chats    |
-| `channelplay.py` | `/channelplay`               | Enable channel mode playback |
 
 **Purpose:** Group-specific settings and user management.
 
@@ -166,7 +161,6 @@ All bot commands and event handlers, organized by category.
 | ----------------- | ------------------------- | ------------------------------- |
 | `adminmention.py` | `/admins`, `/admin`       | Mention all admins in group     |
 | `bots.py`         | `/bots`                   | List all bots in the group      |
-| `groupdata.py`    | `/groupdata`, `/chatinfo` | Display group statistics & info |
 
 **Purpose:** Enhanced group management and information features.
 
@@ -199,7 +193,6 @@ Utility functions used throughout the bot.
 | ---------------- | ----------------------------------------------------- |
 | `_admins.py`     | Admin permission checks (`is_admin`, `can_manage_vc`) |
 | `_dataclass.py`  | Data classes for tracks and media                     |
-| `_exec.py`       | Code execution helpers for eval command               |
 | `_inline.py`     | Inline keyboard button builders                       |
 | `_play.py`       | Music playback helper functions                       |
 | `_preload.py`    | Background preloading system for next tracks          |
@@ -359,10 +352,7 @@ HasiiMusicBot/
     │   ├── admin/                # Owner/sudo commands
     │   │   ├── autoleave.py      # Auto-leave configuration
     │   │   ├── broadcast.py      # Broadcast messages
-    │   │   ├── eval.py           # Code execution
-
     │   │   ├── leave.py          # Leave groups
-    │   │   ├── maintenance.py    # Maintenance mode
     │   │   ├── restart.py        # Bot restart/update
     │   │   ├── sudoers.py        # Sudo management
     │   │   └── vplay_toggle.py   # Video play toggle
@@ -394,13 +384,11 @@ HasiiMusicBot/
     │   │
     │   ├── settings/             # Settings commands
     │   │   ├── auth.py           # Authorization
-    │   │   ├── blacklist.py      # User blocking
-    │   │   └── channelplay.py    # Channel mode
+    │   │   └── blacklist.py      # User blocking
     │   │
     │   ├── utilities/            # Special features
     │   │   ├── adminmention.py   # Mention admins
-    │   │   ├── bots.py           # List bots
-    │   │   └── groupdata.py      # Group info
+    │   │   └── bots.py           # List bots
     │   │
     │   └── games/                # Miscellaneous
     │       └── dicegame.py       # Fun games
@@ -409,7 +397,6 @@ HasiiMusicBot/
     │   ├── __init__.py           # Helper exports
     │   ├── _admins.py            # Admin checks
     │   ├── _dataclass.py         # Data structures
-    │   ├── _exec.py              # Code execution
     │   ├── _inline.py            # Inline keyboards
     │   ├── _play.py              # Playback helpers
     │   ├── _preload.py           # Background preloading

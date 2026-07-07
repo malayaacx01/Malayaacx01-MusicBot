@@ -116,7 +116,6 @@ class Inline:
                 [
                     self.ikb(text="ꜱᴛᴀᴛꜱ", callback_data="help_stats"),
                     self.ikb(text="ꜱᴜᴅᴏ", callback_data="help_sudo"),
-                    self.ikb(text="ᴍᴀɪɴᴛᴇɴᴀɴᴄᴇ", callback_data="help_maintenance"),
                 ],
                 [
                     self.ikb(text="ʙᴀᴄᴋ", callback_data="start"),

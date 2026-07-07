@@ -428,7 +428,6 @@ async def _help(_, query: types.CallbackQuery):
         "ping": query.lang["help_ping"],
         "stats": query.lang["help_stats"],
         "sudo": query.lang["help_sudo"],
-        "maintenance": query.lang["help_maintenance"],
     }
     
     help_text = help_texts.get(category, query.lang["help_admins"])
