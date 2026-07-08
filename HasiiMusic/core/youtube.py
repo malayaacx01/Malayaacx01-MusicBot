@@ -433,7 +433,7 @@ class YouTube:
                 "sleep_interval_requests": 1,
                 # Use android client to bypass YouTube bot detection on server IPs.
                 # Android client does not require PO tokens and works from datacenter IPs.
-                "extractor_args": {"youtube": {"player_client": ["android", "web"]}},
+                # "extractor_args": {"youtube": {"player_client": ["android", "web"]}},
             }
 
             if video:
