@@ -100,20 +100,17 @@ class Inline:
                     self.ikb(text="ʙʀᴏᴀᴅᴄᴀꜱᴛ", callback_data="help_broadcast"),
                 ],
                 [
-                    self.ikb(text="ʙʟ-ᴄʜᴀᴛ", callback_data="help_blchat"),
-                    self.ikb(text="ʙʟ-ᴜꜱᴇʀ", callback_data="help_bluser"),
-                ],
-                [
                     self.ikb(text="ʟᴏᴏᴘ", callback_data="help_loop"),
                     self.ikb(text="ᴘʟᴀʏ", callback_data="help_play"),
                     self.ikb(text="ǫᴜᴇᴜᴇ", callback_data="help_queue"),
                 ],
                 [
+                    self.ikb(text="ʙʟ-ᴄʜᴀᴛ", callback_data="help_blchat"),
+                    self.ikb(text="ʙʟ-ᴜꜱᴇʀ", callback_data="help_bluser"),
                     self.ikb(text="ꜱᴇᴇᴋ", callback_data="help_seek"),
-                    self.ikb(text="ꜱʜᴜꜰꜰʟᴇ", callback_data="help_shuffle"),
-                    self.ikb(text="ᴘɪɴɢ", callback_data="help_ping"),
                 ],
                 [
+                    self.ikb(text="ᴘɪɴɢ", callback_data="help_ping"),
                     self.ikb(text="ꜱᴛᴀᴛꜱ", callback_data="help_stats"),
                     self.ikb(text="ꜱᴜᴅᴏ", callback_data="help_sudo"),
                 ],

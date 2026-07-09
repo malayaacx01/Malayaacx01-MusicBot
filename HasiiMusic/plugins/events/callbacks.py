@@ -122,10 +122,7 @@ async def _controls(_, query: types.CallbackQuery):
     if action == "loop":
         return await handle_loop(query, chat_id, user)
     
-    # Handle shuffle action
-    if action == "shuffle":
-        return await handle_shuffle(query, chat_id, user)
-    
+
     await query.answer(query.lang["processing"], show_alert=True)
 
     if action == "pause":
@@ -338,36 +335,7 @@ async def handle_loop(query: types.CallbackQuery, chat_id: int, user: str):
     await query.message.reply_text(message, quote=False)
 
 
-async def handle_shuffle(query: types.CallbackQuery, chat_id: int, user: str):
-    """Handle queue shuffling."""
-    import random
-    
-    items = queue.get_queue(chat_id)
-    if not items or len(items) <= 1:
-        return await query.answer("⚠️ ǫᴜᴇᴜᴇ ɪꜱ ᴇᴍᴘᴛʏ ᴏʀ ʜᴀꜱ ᴏɴʟʏ ᴏɴᴇ ᴛʀᴀᴄᴋ!", show_alert=True)
-    
-    # Get current track and remove from list
-    current = items[0] if items else None
-    remaining = items[1:] if len(items) > 1 else []
-    
-    if not remaining:
-        return await query.answer("⚠️ ɴᴏ ᴛʀᴀᴄᴋꜱ ᴛᴏ ꜱʜᴜꜰꜰʟᴇ!", show_alert=True)
-    
-    # Shuffle remaining tracks
-    random.shuffle(remaining)
-    
-    # Rebuild queue with current track first
-    queue.clear(chat_id)
-    if current:
-        queue.add(chat_id, current)
-    for item in remaining:
-        queue.add(chat_id, item)
-    
-    await query.answer("🔀 ǫᴜᴇᴜᴇ ꜱʜᴜꜰꜰʟᴇᴅ!", show_alert=False)
-    await query.message.reply_text(
-        f"🔀 ǫᴜᴇᴜᴇ <b>ꜱʜᴜꜰꜰʟᴇᴅ</b> ({len(remaining)} ᴛʀᴀᴄᴋꜱ)",
-        quote=False
-    )
+
 
 
 @app.on_callback_query(filters.regex(r"^help") & ~app.bl_users)
@@ -424,7 +392,6 @@ async def _help(_, query: types.CallbackQuery):
         "play": query.lang["help_play"],
         "queue": query.lang["help_queue"],
         "seek": query.lang["help_seek"],
-        "shuffle": query.lang["help_shuffle"],
         "ping": query.lang["help_ping"],
         "stats": query.lang["help_stats"],
         "sudo": query.lang["help_sudo"],

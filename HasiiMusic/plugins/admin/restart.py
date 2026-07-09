@@ -118,6 +118,3 @@ async def _restart(_, m: types.Message):
     await asyncio.sleep(2)
 
     os.execl(sys.executable, sys.executable, "-m", "HasiiMusic")
-
-
-

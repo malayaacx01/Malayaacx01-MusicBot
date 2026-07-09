@@ -118,7 +118,7 @@ All bot commands and event handlers, organized by category.
 | `start.py`  | `/start`  | Welcome message with bot information       |
 | `ping.py`   | `/ping`   | Check bot response time and uptime         |
 | `stats.py`  | `/stats`  | Bot statistics (users, chats, system info) |
-| `active.py` | `/active` | List active voice chats                    |
+| `active.py` | `/ac`     | List active voice chats                    |
 
 **Purpose:** Informational commands available to all users.
 
@@ -134,7 +134,6 @@ All bot commands and event handlers, organized by category.
 | `skip.py`         | `/skip`           | Skip to next song in queue        |
 | `stop.py`         | `/stop`, `/end`   | Stop playback and clear queue     |
 | `seek.py`         | `/seek`           | Jump to specific timestamp        |
-| `shuffle.py`      | `/shuffle`        | Shuffle queue                     |
 | `loop.py`         | `/loop`           | Toggle loop mode                  |
 | `queue.py`        | `/queue`          | Display current queue             |
 | `radio.py`        | `/radio`          | Stream live radio stations        |
@@ -376,7 +375,6 @@ HasiiMusicBot/
     │   │   ├── skip.py           # Skip command
     │   │   ├── stop.py           # Stop command
     │   │   ├── seek.py           # Seek command
-    │   │   ├── shuffle.py        # Shuffle queue
     │   │   ├── loop.py           # Loop mode
     │   │   ├── queue.py          # Queue display
     │   │   ├── radio.py          # Radio streams
