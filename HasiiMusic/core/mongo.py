@@ -413,102 +413,10 @@ class MongoDB:
             self.users.extend([user["_id"] async for user in self.usersdb.find()])
         return self.users
 
-    async def migrate_coll(self) -> None:
-        """Migrate old collection structure (ObjectId) to new structure (int)."""
-        from bson import ObjectId
-        logger.info("🔄 Migrating users and chats from old collections...")
-
-        musers, mchats, done = [], [], []
-        
-        # Collect all users from both old and new collections
-        try:
-            ulist = [user async for user in self.db.tgusersdb.find()]
-        except Exception:
-            ulist = []
-        
-        try:
-            ulist.extend([user async for user in self.usersdb.find()])
-        except Exception:
-            pass
-
-        # Process users
-        for user in ulist:
-            try:
-                if isinstance(user.get("_id"), ObjectId):
-                    user_id = int(user.get("user_id", 0))
-                    if user_id and user_id not in done:
-                        done.append(user_id)
-                        musers.append({"_id": user_id})
-                else:
-                    user_id = int(user["_id"])
-                    if user_id not in done:
-                        done.append(user_id)
-                        musers.append({"_id": user_id})
-            except (ValueError, KeyError) as e:
-                logger.debug(f"Skipping invalid user entry: {e}")
-                continue
-        
-        # Drop old collections and insert migrated users
-        try:
-            await self.usersdb.drop()
-        except Exception:
-            pass
-        try:
-            await self.db.tgusersdb.drop()
-        except Exception:
-            pass
-        if musers:
-            try:
-                await self.usersdb.insert_many(musers, ordered=False)
-            except Exception as e:
-                logger.debug(f"User migration bulk insert error (may be duplicate keys): {e}")
-
-        # Process chats
-        done.clear()
-        try:
-            async for chat in self.chatsdb.find():
-                try:
-                    if isinstance(chat.get("_id"), ObjectId):
-                        chat_id = int(chat.get("chat_id", 0))
-                        if chat_id and chat_id not in done:
-                            done.append(chat_id)
-                            mchats.append({"_id": chat_id})
-                    else:
-                        chat_id = int(chat["_id"])
-                        if chat_id not in done:
-                            done.append(chat_id)
-                            mchats.append({"_id": chat_id})
-                except (ValueError, KeyError) as e:
-                    logger.debug(f"Skipping invalid chat entry: {e}")
-                    continue
-        except Exception as e:
-            logger.debug(f"Error reading chats collection: {e}")
-        
-        # Drop old collection and insert migrated chats
-        try:
-            await self.chatsdb.drop()
-        except Exception:
-            pass
-        if mchats:
-            try:
-                await self.chatsdb.insert_many(mchats, ordered=False)
-            except Exception as e:
-                logger.debug(f"Chat migration bulk insert error (may be duplicate keys): {e}")
-
-        # Mark migration as complete
-        await self.cache.update_one(
-            {"_id": "migrated"},
-            {"$set": {"status": True, "timestamp": time()}},
-            upsert=True
-        )
-        logger.info("✅ Migration completed successfully.")
 
     async def load_cache(self) -> None:
         """Preload cache data from database for faster access."""
-        # Check if migration needed
-        doc = await self.cache.find_one({"_id": "migrated"})
-        if not doc:
-            await self.migrate_coll()
+
 
         # Preload all cache data
         logger.info("📦 Loading database cache...")
