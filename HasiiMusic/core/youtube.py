@@ -317,7 +317,7 @@ class YouTube:
                 "extractor_retries": 5,
                 "sleep_interval_requests": 1,
                 # Use android client to bypass YouTube bot detection on server IPs
-                "extractor_args": {"youtube": {"player_client": ["android", "web"]}},
+                # "extractor_args": {"youtube": {"player_client": ["android", "web"]}},
             }
 
             def _extract_url():
@@ -345,10 +345,6 @@ class YouTube:
                         else:
                             logger.error(
                                 "Live stream URL extraction failed: %s", ex)
-                        return None
-                    except yt_dlp.utils.DownloadError as ex:
-                        logger.error(
-                            "Unexpected error during live stream extraction: %s", ex)
                         return None
                     except Exception as ex:
                         logger.error(
