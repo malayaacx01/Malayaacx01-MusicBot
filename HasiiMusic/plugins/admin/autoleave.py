@@ -1,9 +1,8 @@
 # ==============================================================================
-# autoleave.py - Auto Leave Command
+# autoleave.py - Auto-Leave
 # ==============================================================================
-# This plugin allows sudo users to enable/disable auto-leave feature.
-# When enabled, assistant will leave voice chat after 5 minutes if no users
-# are listening (only assistant is in the VC).
+# Sudo command to toggle the auto-leave feature on or off. 
+# If on, the assistant drops out of VC after 5 minutes of inactivity.
 # ==============================================================================
 
 from pyrogram import filters
@@ -18,7 +17,6 @@ from HasiiMusic import app, db
     & ~app.bl_users
 )
 async def autoleave_command(_, m: Message) -> None:
-    """Handle /autoleave enable or /autoleave disable command."""
     
     # Check if user is sudo user
     if m.from_user.id not in app.sudoers:

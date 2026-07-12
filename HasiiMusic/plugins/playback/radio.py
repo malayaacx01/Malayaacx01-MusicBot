@@ -1,13 +1,7 @@
 # ==============================================================================
-# radio.py - Live Radio Streaming Plugin
+# radio.py - Live Radio
 # ==============================================================================
-# This plugin allows users to stream live radio stations in voice chats.
-# Features:
-# - 50+ international and local radio stations
-# - Pagination for easy station selection
-# - Live timer display during playback
-# - Admin-only controls (skip, close)
-# - Support for both regular and channel play modes
+# UI and logic for streaming 50+ live radio stations.
 # ==============================================================================
 
 import asyncio
@@ -113,7 +107,6 @@ RADIO_CATEGORIES = {
 
 
 async def _safe_edit_caption(message, caption, reply_markup=None):
-    """Edit caption with FloodWait handling and silent failures."""
     try:
         await message.edit_caption(caption, reply_markup=reply_markup)
     except errors.FloodWait as fw:
@@ -128,7 +121,6 @@ async def _safe_edit_caption(message, caption, reply_markup=None):
 
 
 def category_buttons():
-    """Generate category selection buttons."""
     buttons_list = []
     category_list = list(RADIO_CATEGORIES.keys())
     for idx, category in enumerate(category_list):
@@ -142,7 +134,6 @@ def category_buttons():
 
 
 def radio_buttons(cat_idx, page=0, per_page=10):
-    """Generate pagination buttons for radio stations in a category."""
     category_list = list(RADIO_CATEGORIES.keys())
     category = category_list[cat_idx]
     stations = sorted(RADIO_CATEGORIES[category].keys())
@@ -188,15 +179,6 @@ def radio_buttons(cat_idx, page=0, per_page=10):
 
 
 async def has_radio_control_permission(chat_id, user_id):
-    """
-    Check if user has permission to control radio.
-    Allowed users:
-    - Bot owner
-    - Sudo users
-    - Authorized users in the chat
-    - Chat admins
-    - Anonymous admins
-    """
     # Check if anonymous admin
     if user_id == 1087968824:
         return True
@@ -222,7 +204,6 @@ async def has_radio_control_permission(chat_id, user_id):
 
 
 async def update_timer(chat_id, message_id, station_name, start_time):
-    """Update the timer on the radio message."""
     last_timer = None
     update_count = 0
     while True:
@@ -279,7 +260,6 @@ async def update_timer(chat_id, message_id, station_name, start_time):
 )
 @lang.language()
 async def radio_handler(_, m: Message) -> None:
-    """Handle radio command for group voice chats only."""
     # Auto-delete command message
     try:
         await m.delete()

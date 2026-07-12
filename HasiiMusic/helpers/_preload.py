@@ -1,14 +1,7 @@
 # ==============================================================================
-# _preload.py - Background Track Preloading Manager
+# _preload.py - Track Preloading Logic
 # ==============================================================================
-# This module handles downloading the next track in the background while
-# the current track is playing to ensure seamless transitions.
-#
-# Features:
-# - Background download of next track
-# - Automatic cancellation of outdated preload tasks
-# - Prevents redundant downloads
-# - Non-blocking async operations
+# Internal logic for managing the background downloading of upcoming tracks.
 # ==============================================================================
 
 import asyncio
@@ -27,7 +20,6 @@ class PreloadManager:
     """
 
     def __init__(self):
-        """Initialize the preload manager."""
         # Track active preload tasks by chat and media id:
         # {chat_id: {media_id: task}}
         self._tasks: Dict[int, Dict[str, asyncio.Task]] = {}
@@ -36,13 +28,6 @@ class PreloadManager:
         self._preloaded: Dict[int, Set[str]] = {}
 
     async def preload_next(self, chat_id: int, media) -> None:
-        """
-        Start preloading the next track for a chat.
-        
-        Args:
-            chat_id: The chat ID to preload for
-            media: The Media/Track object to preload
-        """
         media_id = getattr(media, "id", None)
         if not media_id:
             return
@@ -68,13 +53,6 @@ class PreloadManager:
         self._tasks[chat_id][media_id] = task
 
     async def _preload_task(self, chat_id: int, media) -> None:
-        """
-        Background task to preload a track.
-        
-        Args:
-            chat_id: The chat ID to preload for
-            media: The Media/Track object to preload
-        """
         try:
             # Import here to avoid circular dependency
             from HasiiMusic import yt
@@ -108,12 +86,6 @@ class PreloadManager:
                     self._tasks.pop(chat_id, None)
 
     async def cancel_preload(self, chat_id: int) -> None:
-        """
-        Cancel any active preload task for a chat.
-        
-        Args:
-            chat_id: The chat ID to cancel preload for
-        """
         media_tasks = self._tasks.get(chat_id, {})
         if media_tasks:
             active = [task for task in media_tasks.values() if not task.done()]
@@ -128,25 +100,9 @@ class PreloadManager:
         self._tasks.pop(chat_id, None)
 
     def is_preloaded(self, chat_id: int, media_id: str) -> bool:
-        """
-        Check if a specific track is preloaded for a chat.
-        
-        Args:
-            chat_id: The chat ID to check
-            media_id: The media ID to check
-            
-        Returns:
-            bool: True if the track is preloaded
-        """
         return media_id in self._preloaded.get(chat_id, set())
 
     def clear(self, chat_id: int) -> None:
-        """
-        Clear preload cache for a chat (non-async version).
-        
-        Args:
-            chat_id: The chat ID to clear
-        """
         self._preloaded.pop(chat_id, None)
         self._tasks.pop(chat_id, None)
 

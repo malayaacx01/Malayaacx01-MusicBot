@@ -1,16 +1,7 @@
 # ==============================================================================
-# loop.py - Loop Mode Command
+# loop.py - Loop Controls
 # ==============================================================================
-# This plugin handles loop mode management.
-#
-# Commands:
-# - /loop - Cycle through loop modes (disable -> single -> queue -> disable)
-# - /loop disable - Disable loop
-# - /loop single - Loop current track
-# - /loop queue - Loop entire queue
-#
-# Requirements:
-# - User must be admin or authorized user
+# Commands to cycle or set the loop state (off, single track, full queue).
 # ==============================================================================
 
 from pyrogram import filters, types

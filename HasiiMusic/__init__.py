@@ -1,9 +1,8 @@
-"""
-˹ʜᴀꜱɪɪ ᴍᴜꜱɪᴄ˼ - Advanced Telegram Music Bot
-
-This is the main initialization module that sets up logging, configuration,
-and all core components required for the bot to function.
-"""
+# ==============================================================================
+# ˹ʜᴀꜱɪɪ ᴍᴜꜱɪᴄ˼ Core Initialization
+# ==============================================================================
+# Sets up logging, config, and instantiates the main singleton objects (db, bot, etc.)
+# ==============================================================================
 
 import asyncio
 import time
@@ -97,15 +96,6 @@ tune = TgCall()
 
 
 async def stop() -> None:
-    """
-    Gracefully shutdown the bot and all its components.
-    
-    This function:
-    - Cancels all running background tasks
-    - Closes bot and userbot connections
-    - Closes database connection
-    - Logs shutdown completion
-    """
     logger.info("🛑 Stopping bot...")
     
     # Cancel all background tasks

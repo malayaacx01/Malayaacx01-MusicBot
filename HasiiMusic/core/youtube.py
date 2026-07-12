@@ -1,7 +1,7 @@
 # ==============================================================================
-# youtube.py - YouTube Download & Search Handler
+# youtube.py - YouTube Integration
 # ==============================================================================
-# Handles YouTube search, download, and cookies
+# Handles searching for tracks, downloading them via yt-dlp, and managing cookies.
 # ==============================================================================
 
 import os
@@ -24,7 +24,6 @@ from HasiiMusic.helpers import Track, utils
 
 class YouTube:
     def __init__(self):
-        """Init YouTube downloader."""
         self.base = "https://www.youtube.com/watch?v="  # Base YouTube URL
         self.cookies = []  # List of available cookie files
         self.checked = False  # Whether cookies directory has been checked
@@ -46,7 +45,6 @@ class YouTube:
         self._max_video_height = getattr(config, "VIDEO_MAX_HEIGHT", 1080)
 
     def _locate_download_file(self, video_id: str, video: bool = False) -> Optional[str]:
-        """Find downloaded file."""
         pattern = f"downloads/{video_id}*"
         candidates = sorted([
             path for path in glob.glob(pattern)

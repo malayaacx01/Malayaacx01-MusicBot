@@ -1,17 +1,8 @@
 # ==============================================================================
-# misc.py - Miscellaneous Event Handlers
+# misc.py - Background Tasks & Events
 # ==============================================================================
-# This plugin handles various bot events and background tasks.
-#
-# Events:
-# - Voice chat started/ended - Auto-stop playback
-# - Bot mentioned - Send info message
-# - Auto-leave - Remove inactive assistants from groups every 30 minutes
-#
-# Features:
-# - Automatic cleanup of inactive voice chat sessions
-# - Bot promotion reminders
-# - Keep assistants from cluttering unused groups
+# Background jobs like auto-leaving empty calls, tracking playback time,
+# updating progress bars, and handling voice chat state changes.
 # ==============================================================================
 
 import asyncio
@@ -34,7 +25,6 @@ async def _watcher_vc(_, m: types.Message):
 
 
 async def auto_leave():
-    """Auto-leave inactive groups. Runs in background with error recovery."""
     while True:
         try:
             await asyncio.sleep(1800)
@@ -68,7 +58,6 @@ async def auto_leave():
 
 
 async def track_time():
-    """Track playback time. Runs in background with error recovery."""
     while True:
         try:
             await asyncio.sleep(1)
@@ -91,11 +80,9 @@ async def track_time():
 
 
 async def update_timer(length=10):
-    """Update progress bar every 20 seconds for all active chats independently."""
     chat_tasks = {}  # Track individual chat update tasks
 
     async def _preload_next(chat_id, next_media):
-        """Pre-download next song without blocking timer updates."""
         try:
             next_media.file_path = await yt.download(
                 next_media.id,
@@ -105,7 +92,6 @@ async def update_timer(length=10):
             print(f"Preload error for chat {chat_id}: {e}")
 
     async def update_chat_timer(chat_id):
-        """Update timer for a specific chat every 20 seconds."""
         while True:
             try:
                 await asyncio.sleep(20)
@@ -201,7 +187,6 @@ async def update_timer(length=10):
 
 
 async def vc_watcher(sleep=15):
-    """Leave voice chat after 5 minutes if no users are listening."""
     alone_times = {}  # Track when assistant started being alone in VC
     LEAVE_TIMEOUT = 300  # 5 minutes in seconds (hardcoded)
     

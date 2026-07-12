@@ -1,16 +1,7 @@
 # ==============================================================================
-# adminmention.py - Admin Mention Plugin
+# adminmention.py - Admin Tagging
 # ==============================================================================
-# This plugin allows users to mention all group admins by typing @admin,
-# .admin, or /admin followed by a message.
-#
-# Commands:
-# - @admin [message] - Mention all admins with a message
-# - .admin [message] - Mention all admins with a message
-# - /admin [message] - Mention all admins with a message
-#
-# Requirements:
-# - Bot must have permission to read messages in the group
+# Quick commands (@admin, .admin, /admin) to ping all group admins at once.
 # ==============================================================================
 
 import re
@@ -25,9 +16,6 @@ TRIGGER_PATTERN = re.compile(r"(?i)(\.|@|\/)admin")
 
 @app.on_message(filters.group & filters.regex(r"(?i)(\.|@|\/)admin"))
 async def mention_admins(_, message: types.Message):
-    """
-    Mention all group admins when someone types @admin, .admin, or /admin
-    """
     try:
         # Extract the message without the trigger
         message_text = message.text or message.caption or ""

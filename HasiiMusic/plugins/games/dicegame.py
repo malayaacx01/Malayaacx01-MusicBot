@@ -1,9 +1,7 @@
 # ==============================================================================
-# dicegame.py - Telegram Dice Game Commands
+# dicegame.py - Mini Games
 # ==============================================================================
-# Fun emoji dice games using Telegram's built-in dice feature.
-# Commands: /dice, /dart, /basket, /jackpot, /ball, /football
-# Can also be triggered by sending the emoji directly: 🎲, 🎯, 🏀, 🎰, 🎳, ⚽
+# Telegram's built-in animated dice games (/dice, /dart, /basket, etc).
 # ==============================================================================
 
 from pyrogram import filters

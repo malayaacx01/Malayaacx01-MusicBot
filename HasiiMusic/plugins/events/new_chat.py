@@ -1,13 +1,7 @@
 # ==============================================================================
-# new_chat.py - New Group Handler
+# new_chat.py - Group Join/Leave Logs
 # ==============================================================================
-# This plugin handles when the bot is added to a new group.
-#
-# Features:
-# - Send notification to logger channel with group info
-# - Welcome message in the group
-# - Check if group meets requirements (supergroup, admin permissions)
-# - Log group details (name, ID, member count, who added the bot)
+# Logs whenever the bot is added to or kicked from a group to the logger channel.
 # ==============================================================================
 
 from pyrogram import filters, types
@@ -18,7 +12,6 @@ from HasiiMusic import app, config
 
 @app.on_message(filters.new_chat_members & filters.group)
 async def new_chat_member(_, message: types.Message):
-    """Handler for when bot is added to a new group"""
 
     # Check if the bot itself was added
     for member in message.new_chat_members:
@@ -63,7 +56,6 @@ async def new_chat_member(_, message: types.Message):
 
 @app.on_message(filters.left_chat_member & filters.group)
 async def left_chat_member(_, message: types.Message):
-    """Handler for when bot is removed from a group"""
 
     # Check if the bot itself was removed
     if message.left_chat_member.id == app.id:

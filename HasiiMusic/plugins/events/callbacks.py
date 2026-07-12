@@ -1,15 +1,8 @@
 # ==============================================================================
-# callbacks.py - Callback Query Handler
+# callbacks.py - Button Interactions
 # ==============================================================================
-# This plugin handles inline button callbacks (when users press inline buttons).
-#
-# Callback Types:
-# - cancel_dl - Cancel ongoing download
-# - controls - Playback controls (pause, resume, skip, replay, etc.)
-# - close - Close/delete message
-# - help_menu - Navigate help pages
-#
-# Most callbacks require admin/authorized user permissions.
+# All the logic for when users click inline buttons (skipping tracks, pausing,
+# navigating the help menu, etc).
 # ==============================================================================
 
 import re
@@ -24,7 +17,6 @@ from HasiiMusic.helpers import admin_check, buttons, can_manage_vc
 
 
 def safe_callback(func):
-    """Decorator to handle exceptions in callback handlers."""
     @wraps(func)
     async def wrapper(client, query: types.CallbackQuery):
         try:
@@ -44,7 +36,6 @@ def safe_callback(func):
 @lang.language()
 @safe_callback
 async def _start_callback(_, query: types.CallbackQuery):
-    """Handle start button callback - return to start message."""
     await query.answer()
     
     _text = query.lang["start_pm"].format(query.from_user.first_name, app.name)
@@ -246,7 +237,6 @@ async def _controls(_, query: types.CallbackQuery):
 
 
 async def handle_seek(query: types.CallbackQuery, chat_id: int, action: str, user: str):
-    """Handle seek forward/backward actions."""
     media = queue.get_current(chat_id)
     if not media or media.is_live:
         return await query.answer("⚠️ ᴄᴀɴɴᴏᴛ ꜱᴇᴇᴋ ɪɴ ʟɪᴠᴇ ꜱᴛʀᴇᴀᴍꜱ!", show_alert=True)
@@ -313,7 +303,6 @@ async def handle_seek(query: types.CallbackQuery, chat_id: int, action: str, use
 
 
 async def handle_loop(query: types.CallbackQuery, chat_id: int, user: str):
-    """Handle loop mode toggling."""
     current_loop = await db.get_loop(chat_id)
     
     # Cycle through loop modes: 0 (off) -> 1 (single) -> 10 (queue) -> 0

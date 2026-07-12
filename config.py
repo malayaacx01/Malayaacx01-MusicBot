@@ -1,24 +1,9 @@
 # ==============================================================================
-# config.py - Bot Configuration Manager
+# config.py - Configuration
 # ==============================================================================
-# This file loads all configuration settings from environment variables (.env file).
-#
-# What it does:
-# - Reads settings from .env file (API keys, bot token, database URL, etc.)
-# - Validates that all required settings are present
-# - Provides default values for optional settings
-# - Converts string values to appropriate types (int, bool, list)
-#
-# Important: Never commit your .env file to git! It contains sensitive data.
-# Use sample.env as a template to create your own .env file.
+# Pulls in all environment variables and sets defaults.
+# Don't commit your .env file!
 # ==============================================================================
-
-"""
-Configuration module for ˹ʜᴀꜱɪɪ ᴍᴜꜱɪᴄ˼.
-
-This module loads and validates all environment variables required for the bot to function.
-It provides a centralized Config class that manages all configuration settings.
-"""
 
 from os import getenv
 from typing import List
@@ -29,15 +14,7 @@ load_dotenv()
 
 
 class Config:
-    """
-    Configuration class for managing bot settings.
-
-    All settings are loaded from environment variables with sensible defaults where applicable.
-    Required variables are validated on initialization through the check() method.
-    """
-
     def __init__(self):
-        """Initialize configuration by loading all environment variables."""
 
         # ============ TELEGRAM API CREDENTIALS ============
         # Get these from https://my.telegram.org
@@ -136,12 +113,6 @@ class Config:
         return max(480, min(height, 2160))
 
     def _parse_excluded_chats(self) -> List[int]:
-        """
-        Parse excluded chat IDs from comma-separated string.
-
-        Returns:
-            List[int]: List of chat IDs to exclude from auto-leave.
-        """
         excluded = getenv("EXCLUDED_CHATS", "")
         if not excluded:
             return []
@@ -154,13 +125,6 @@ class Config:
         return chat_ids
 
     def _parse_cookies(self) -> List[str]:
-        """
-        Parse YouTube cookie URLs from space-separated string.
-        Supports multiple cookie sources (batbin, pastebin, etc.)
-
-        Returns:
-            List[str]: List of valid cookie URLs.
-        """
         cookie_str = getenv("COOKIE_URL", "")
         if not cookie_str:
             return []
@@ -174,24 +138,9 @@ class Config:
 
     @staticmethod
     def _str_to_bool(value: str) -> bool:
-        """
-        Convert string to boolean value.
-
-        Args:
-            value: String representation of boolean.
-
-        Returns:
-            bool: Converted boolean value.
-        """
         return value.lower() in ("true", "1", "yes", "y", "on")
 
     def check(self) -> None:
-        """
-        Validate that all required environment variables are set.
-
-        Raises:
-            SystemExit: If any required variables are missing.
-        """
         required_vars = {
             "API_ID": self.API_ID,
             "API_HASH": self.API_HASH,

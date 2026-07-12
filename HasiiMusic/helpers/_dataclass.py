@@ -1,12 +1,7 @@
 # ==============================================================================
-# _dataclass.py - Data Classes for Media and Tracks
+# _dataclass.py - Models
 # ==============================================================================
-# This file defines data structures used throughout the bot:
-# - Media: Represents Telegram audio/video files
-# - Track: Represents YouTube tracks
-#
-# These dataclasses make it easy to pass media information between functions
-# while maintaining type safety and clear structure.
+# Simple data structures to pass around Media and Track info safely.
 # ==============================================================================
 
 from dataclasses import dataclass

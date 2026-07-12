@@ -1,11 +1,8 @@
 # ==============================================================================
-# __init__.py - Helper Functions Export Module
+# HasiiMusic.helpers
 # ==============================================================================
-# This file exports all helper functions and classes for easy importing.
-# Instead of importing from individual files, plugins can simply:
-#   from HasiiMusic.helpers import buttons, thumb, utils, Queue, Track
-#
-# This makes imports cleaner and provides a single entry point for all helpers.
+# Exports all the helper singletons (buttons, thumb, utils, etc) so plugins
+# can grab them easily.
 # ==============================================================================
 
 from ._admins import admin_check, can_manage_vc, is_admin, reload_admins

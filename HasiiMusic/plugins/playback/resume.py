@@ -1,14 +1,7 @@
 # ==============================================================================
-# resume.py - Resume Playback Command
+# resume.py - Resume Command
 # ==============================================================================
-# This plugin handles resuming paused voice chat playback.
-#
-# Commands:
-# - /resume - Resume paused playback
-#
-# Requirements:
-# - User must be admin or authorized user
-# - Music must be currently paused
+# /resume command to unpause playback in the voice chat.
 # ==============================================================================
 
 import logging

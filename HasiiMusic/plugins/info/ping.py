@@ -1,19 +1,7 @@
 # ==============================================================================
-# ping.py - Ping/Alive Command
+# ping.py - System Ping
 # ==============================================================================
-# This plugin shows bot status and performance metrics.
-#
-# Commands:
-# - /ping - Show bot latency and system stats
-# - /alive - Same as /ping
-#
-# Displays:
-# - Response latency
-# - Uptime
-# - CPU usage
-# - RAM usage
-# - Disk usage
-# - Voice call latency
+# Check bot latency and server metrics like CPU/RAM usage.
 # ==============================================================================
 
 import time

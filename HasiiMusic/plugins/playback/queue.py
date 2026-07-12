@@ -1,17 +1,7 @@
 # ==============================================================================
-# queue.py - Queue Display Command
+# queue.py - Now Playing & Queue
 # ==============================================================================
-# This plugin displays the current queue and now playing information.
-#
-# Commands:
-# - /queue - Show current queue
-# - /playing - Same as /queue
-#
-# Displays:
-# - Currently playing track with thumbnail
-# - Track title, duration, user who requested
-# - Upcoming tracks in queue (expandable list)
-# - Queue length and total duration
+# Displays the currently playing track and upcoming queue list.
 # ==============================================================================
 
 from pyrogram import filters, types

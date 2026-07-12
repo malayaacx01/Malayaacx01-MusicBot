@@ -1,15 +1,7 @@
 # ============================================================================== 
-# vplay_toggle.py - VPlay Toggle Commands (Sudo Only)
+# vplay_toggle.py - Video Play Toggle
 # ============================================================================== 
-# This plugin allows sudo users to enable/disable /vplay globally at runtime.
-#
-# Commands:
-# - /enable vplay
-# - /disable vplay
-#
-# Also accepts "/vplay" as argument:
-# - /enable /vplay
-# - /disable /vplay
+# Globally turn /vplay on or off without restarting the bot.
 # ============================================================================== 
 
 from pyrogram import filters, types

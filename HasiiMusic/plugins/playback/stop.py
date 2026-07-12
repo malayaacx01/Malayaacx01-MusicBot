@@ -1,15 +1,7 @@
 # ==============================================================================
-# stop.py - Stop Playback Command
+# stop.py - Stop Playback
 # ==============================================================================
-# This plugin handles stopping voice chat playback and clearing the queue.
-#
-# Commands:
-# - /stop - Stop playback and clear queue
-# - /end - Same as /stop
-#
-# Requirements:
-# - User must be admin or authorized user
-# - Music must be playing
+# Stops the stream and clears the entire active queue.
 # ==============================================================================
 
 import asyncio

@@ -1,20 +1,7 @@
 # ==============================================================================
-# play.py - Main Play Command Handler
+# play.py - Core Playback
 # ==============================================================================
-# This is the core plugin that handles all play-related commands:
-# - /play <query> - Play audio from YouTube search or URL
-# - /vplay <query> - Play video in the voice chat (when enabled)
-# - /playforce - Force play (skip queue and play immediately)
-# - /vplayforce - Force video playback (skip queue)
-# - /cplay - Play in connected channel
-# - /cvplay - Play video in connected channel (when enabled)
-# 
-# Supports:
-# - YouTube search queries
-# - YouTube URLs (videos and playlists)
-# - Telegram audio files (via reply)
-# - Queue management
-# - Channel play mode
+# Handles all /play commands, searching YouTube, managing queues, and initiating playback.
 # ==============================================================================
 
 from pyrogram import filters
@@ -31,17 +18,6 @@ logger = logging.getLogger(__name__)
 
 
 async def safe_edit(message, text, **kwargs):
-    """
-    Safely edit a message with proper error handling for common Telegram API errors.
-    
-    Args:
-        message: The message object to edit
-        text: New text content
-        **kwargs: Additional arguments for edit_text
-        
-    Returns:
-        True if successful, False otherwise
-    """
     try:
         await message.edit_text(text, **kwargs)
         return True
@@ -61,17 +37,6 @@ async def safe_edit(message, text, **kwargs):
 
 
 async def safe_reply(message, text, **kwargs):
-    """
-    Safely send a reply message with proper error handling for media-only chats.
-    
-    Args:
-        message: The message object to reply to
-        text: Text content to send
-        **kwargs: Additional arguments for reply_text
-        
-    Returns:
-        The sent message object if successful, None otherwise
-    """
     try:
         return await message.reply_text(text, **kwargs)
     except (ChatSendPlainForbidden, ChatWriteForbidden):
@@ -83,16 +48,6 @@ async def safe_reply(message, text, **kwargs):
 
 
 def playlist_to_queue(chat_id: int, tracks: list) -> str:
-    """
-    Add multiple tracks to queue and format them as a message.
-    
-    Args:
-        chat_id: The chat ID where queue is managed
-        tracks: List of Track objects to add
-        
-    Returns:
-        Formatted string listing all added tracks
-    """
     text = "<blockquote expandable>"
     for track in tracks:
         pos = queue.add(chat_id, track)  # Add track to queue (returns 0-based index)

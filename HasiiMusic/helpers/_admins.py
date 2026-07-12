@@ -1,12 +1,7 @@
 # ==============================================================================
-# _admins.py - Admin Permission Decorators
+# _admins.py - Permissions
 # ==============================================================================
-# This file contains decorator functions that check user permissions.
-# These decorators are used to protect commands that require admin rights.
-#
-# Available decorators:
-# - @admin_check: Requires user to be group admin or sudo user
-# - @can_manage_vc: Requires permission to manage voice chats (or be authorized)
+# Decorators to restrict commands to admins or authorized users.
 # ==============================================================================
 
 from functools import wraps
@@ -18,19 +13,7 @@ from HasiiMusic import app, db
 
 
 def admin_check(func):
-    """
-    Decorator to check if user is an admin in the chat.
-
-    - Allows sudo users (owner) to bypass admin check
-    - Checks if user is in the admin list for the chat
-    - Returns error message if user is not admin
-
-    Usage:
-        @admin_check
-        async def my_admin_command(_, message):
-            # Only admins can execute this
-            pass
-    """
+    """Ensures only admins or sudo users can run the command."""
     @wraps(func)
     async def wrapper(_, update: types.Message | types.CallbackQuery, *args, **kwargs):
         # Helper function to send reply (works for messages and callbacks)
@@ -76,20 +59,7 @@ def admin_check(func):
 
 
 def can_manage_vc(func):
-    """
-    Decorator to check if user can manage voice chats.
-
-    Allows:
-    - Sudo users (bot owner)
-    - Authorized users (added via /auth command)
-    - Group admins with voice chat management permission
-
-    Usage:
-        @can_manage_vc
-        async def my_vc_command(_, message):
-            # Only users with VC permissions can execute this
-            pass
-    """
+    """Ensures the user has permission to manage voice chats."""
     @wraps(func)
     async def wrapper(_, update: types.Message | types.CallbackQuery, *args, **kwargs):
         # Get chat ID and user ID

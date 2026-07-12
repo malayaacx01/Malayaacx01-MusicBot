@@ -1,17 +1,7 @@
 # ==============================================================================
-# seek.py - Seek to Timestamp Command
+# seek.py - Seek Control
 # ==============================================================================
-# This plugin allows seeking to a specific timestamp in the current track.
-#
-# Commands:
-# - /seek <seconds> - Seek forward to timestamp
-# - /seekback <seconds> - Seek backward to timestamp
-#
-# Requirements:
-# - User must be admin or authorized user
-# - Music must be playing (not paused)
-# - Track must have a known duration (not live streams)
-# - Minimum seek: 10 seconds
+# Commands to jump forward or backward in the currently playing track.
 # ==============================================================================
 
 from pyrogram import filters, types

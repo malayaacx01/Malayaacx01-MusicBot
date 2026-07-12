@@ -1,21 +1,9 @@
-"""
-Broadcast plugin for ˹ʜᴀꜱɪɪ ᴍᴜꜱɪᴄ˼.
-
-This plugin allows sudo users to broadcast messages to all groups and users
-where the bot is active. It supports various options like sending to users only,
-excluding groups, and more.
-
-Commands:
-    /broadcast <message> [-user] [-nochat] [-pin] [-pinloud] [-copy]: Broadcast a message
-    /stop_gcast, /stop_broadcast: Stop ongoing broadcast
-
-Flags:
-    -user: Also send to individual users (in addition to groups)
-    -nochat: Don't send to groups (only valid with -user)
-    -pin: Pin the broadcasted message (silently)
-    -pinloud: Pin the broadcasted message (with notification)
-    -copy: Send as a copy without forward tag (default: forwards with tag)
-"""
+# ==============================================================================
+# broadcast.py - Mass Messaging
+# ==============================================================================
+# Sudo command to send a message to all active groups and users.
+# Supports various flags for pinning, forwarding, copying, etc.
+# ==============================================================================
 
 import os
 import asyncio
@@ -33,21 +21,6 @@ broadcasting: bool = False
 @app.on_message(filters.command(["broadcast"]) & app.sudo_filter)
 @lang.language()
 async def broadcast_message(_, message: types.Message) -> None:
-    """
-    Broadcast a message to all groups and/or users.
-
-    Usage:
-        /broadcast <reply to message> - Forward message to all groups
-        /broadcast -copy <reply to message> - Send as copy (no forward tag) to all groups
-        /broadcast -user <reply to message> - Forward to all groups and users
-        /broadcast -nochat -user <message> - Send only to users
-
-    Args:
-        message: The Telegram message containing the broadcast command.
-
-    Returns:
-        None
-    """
     # Auto-delete command message
     try:
         await message.delete()
@@ -116,15 +89,6 @@ async def broadcast_message(_, message: types.Message) -> None:
 @app.on_message(filters.command(["stop_gcast", "stop_broadcast"]) & app.sudo_filter)
 @lang.language()
 async def stop_broadcast(_, message: types.Message) -> None:
-    """
-    Stop an ongoing broadcast operation.
-
-    Args:
-        message: The Telegram message containing the stop command.
-
-    Returns:
-        None
-    """
     # Auto-delete command message
     try:
         await message.delete()
@@ -178,16 +142,6 @@ def _parse_broadcast_command(text: str) -> Tuple[List[str], str]:
 
 
 async def _get_media_group(chat_id: int, message: types.Message) -> List[types.Message]:
-    """
-    Get all messages in a media group (album).
-
-    Args:
-        chat_id: The chat ID where the media group is.
-        message: One message from the media group.
-
-    Returns:
-        List of messages in the media group, sorted by message ID.
-    """
     if not message.media_group_id:
         return None
 
@@ -219,15 +173,6 @@ async def _get_media_group(chat_id: int, message: types.Message) -> List[types.M
 
 
 def _parse_broadcast_command(text: str) -> Tuple[List[str], str]:
-    """
-    Parse broadcast command to extract flags and message.
-
-    Args:
-        text: The full command text.
-
-    Returns:
-        Tuple of (flags list, message text)
-    """
     # Handle None or empty text
     if not text:
         return [], ""
@@ -271,15 +216,6 @@ def _parse_broadcast_command(text: str) -> Tuple[List[str], str]:
 
 
 async def _get_broadcast_recipients(flags: List[str]) -> Tuple[List[int], List[int]]:
-    """
-    Get list of groups and users to broadcast to based on flags.
-
-    Args:
-        flags: List of command flags.
-
-    Returns:
-        Tuple of (groups list, users list)
-    """
     groups = []
     users = []
 
@@ -295,15 +231,6 @@ async def _get_broadcast_recipients(flags: List[str]) -> Tuple[List[int], List[i
 
 
 async def _log_broadcast_start(message: types.Message) -> None:
-    """
-    Log broadcast initiation to logger group.
-
-    Args:
-        message: The original broadcast command message.
-
-    Returns:
-        None
-    """
     try:
         log_message = await app.send_message(
             chat_id=app.logger,
@@ -344,22 +271,6 @@ async def _send_broadcast(
     lang: dict = None,
     media_group: List[types.Message] = None,
 ) -> Tuple[int, int, str]:
-    """
-    Send broadcast message to all recipients.
-
-    Args:
-        text: Message text to broadcast.
-        groups: List of group chat IDs.
-        users: List of user IDs.
-        status_message: Message to update with progress.
-        media_message: Optional media message to broadcast.
-        flags: List of command flags.
-        lang: Language dictionary for localized strings.
-        media_group: Optional list of messages if broadcasting a media group (album).
-
-    Returns:
-        Tuple of (successful groups count, successful users count, failed chats log)
-    """
     global broadcasting
 
     # Use provided flags or default to empty list
@@ -759,20 +670,6 @@ async def _send_broadcast_completion(
     failed_log: str,
     media_message: types.Message | None = None,
 ) -> None:
-    """
-    Send broadcast completion message with results.
-
-    Args:
-        message: Original command message.
-        status_message: Status message to edit.
-        success_groups: Number of successful group sends.
-        success_users: Number of successful user sends.
-        failed_log: Log of failed sends.
-        media_message: Optional media message that was broadcast.
-
-    Returns:
-        None
-    """
     media_type = "text"
     if media_message:
         if media_message.photo:

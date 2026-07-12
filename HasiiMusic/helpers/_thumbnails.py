@@ -1,16 +1,8 @@
 # ==============================================================================
-# _thumbnails.py - Dynamic Thumbnail Generator
+# _thumbnails.py - Thumbnails
 # ==============================================================================
-# This file generates beautiful custom thumbnails for now playing messages.
-# Features:
-# - Modern frosted glass design
-# - Background blur effect with album art
-# - Track title and metadata display
-# - Progress bar visualization
-# - Social media icons
-# - Responsive text sizing
-# - Image caching for performance
-# - Non-blocking PIL operations (runs in thread executor)
+# Generates the frosted glass "Now Playing" thumbnails using PIL.
+# Runs in a separate thread so it doesn't block the main asyncio loop.
 # ==============================================================================
 
 import os
@@ -48,7 +40,6 @@ MAX_TITLE_WIDTH = 580
 
 
 def trim_to_width(text: str, font: ImageFont.FreeTypeFont, max_w: int) -> str:
-    """Trim text to fit within max width, adding ellipsis if needed."""
     ellipsis = "…"
     if font.getlength(text) <= max_w:
         return text
@@ -76,7 +67,6 @@ class Thumbnail:
             return output_path
 
     async def generate(self, song: Track, size=(1280, 720)) -> str:
-        """Generate thumbnail - downloads async, PIL operations in thread pool"""
         try:
             temp = f"cache/temp_{song.id}.jpg"
             output = f"cache/{song.id}_modern.png"
@@ -95,7 +85,6 @@ class Thumbnail:
             return config.DEFAULT_THUMB
 
     def _generate_sync(self, temp: str, output: str, song: Track, size=(1280, 720)) -> str:
-        """Synchronous PIL operations - runs in thread pool"""
         try:
             # Prepare base image
             with Image.open(temp) as temp_img:

@@ -1,14 +1,7 @@
 # ==============================================================================
-# pause.py - Pause Playback Command
+# pause.py - Pause Command
 # ==============================================================================
-# This plugin handles pausing the current voice chat playback.
-#
-# Commands:
-# - /pause - Pause current playback
-#
-# Requirements:
-# - User must be admin or authorized user
-# - Music must be currently playing
+# /pause command to suspend playback in the voice chat.
 # ==============================================================================
 
 import logging

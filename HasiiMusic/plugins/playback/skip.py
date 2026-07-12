@@ -1,15 +1,7 @@
 # ==============================================================================
-# skip.py - Skip Track Command
+# skip.py - Skip Track
 # ==============================================================================
-# This plugin handles skipping to the next track in the queue.
-#
-# Commands:
-# - /skip - Skip current track and play next
-# - /next - Same as /skip
-#
-# Requirements:
-# - User must be admin or authorized user
-# - Music must be playing
+# Skips the current track and automatically starts the next one in queue.
 # ==============================================================================
 
 import asyncio

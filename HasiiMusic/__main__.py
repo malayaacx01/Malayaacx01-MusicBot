@@ -1,13 +1,8 @@
 # ==============================================================================
-# __main__.py - Main Entry Point for ˹ʜᴀꜱɪɪ ᴍᴜꜱɪᴄ˼
+# __main__.py - Entry Point
 # ==============================================================================
-# This is the main file that starts the bot. It performs the following:
-# 1. Connects to the database
-# 2. Starts the bot client
-# 3. Starts assistant (userbot) clients
-# 4. Loads all plugin modules
-# 5. Initializes YouTube cookies if configured
-# 6. Keeps the bot running until manually stopped
+# Bootstraps the bot: connects to Mongo, starts the client and assistants, 
+# loads plugins, and idles until killed.
 # ==============================================================================
 
 import asyncio
@@ -35,19 +30,19 @@ from HasiiMusic.plugins import all_modules
 
 async def main():
     try:
-        # Step 1: Connect to MongoDB database
+        # Connect to DB
         await db.connect()
         
-        # Step 2: Start the main bot client
+        # Start the main bot client
         await app.boot()
         
-        # Step 3: Start assistant/userbot clients (for joining voice chats)
+        # Start assistant/userbot clients
         await userbot.boot()
         
-        # Step 4: Initialize voice call handler
+        # Initialize voice call handler
         await tune.boot()
 
-        # Step 5: Load all plugin modules (commands like /play, /pause, etc.)
+        # Load all plugins
         for module in all_modules:
             try:
                 importlib.import_module(f"HasiiMusic.plugins.{module}")
@@ -55,22 +50,22 @@ async def main():
                 logger.error(f"Failed to load plugin {module}: {e}", exc_info=True)
         logger.info(f"🔌 Loaded {len(all_modules)} plugin modules.")
 
-        # Step 6: Download YouTube cookies if URLs are provided (for age-restricted videos)
+        # Download YouTube cookies if provided
         if config.COOKIES_URL:
             try:
                 await yt.save_cookies(config.COOKIES_URL)
             except Exception as e:
                 logger.error(f"Failed to download cookies: {e}")
 
-        # Step 7: Load sudo users and blacklisted users from database
+        # Load sudoers and blacklisted users
         sudoers = await db.get_sudoers()
-        app.sudoers.update(sudoers)  # Add sudo users to set
-        app.sudo_filter.update(sudoers)  # Add sudo users to filter
-        app.bl_users.update(await db.get_blacklisted())  # Add blacklisted users to filter
+        app.sudoers.update(sudoers)
+        app.sudo_filter.update(sudoers)
+        app.bl_users.update(await db.get_blacklisted())
         logger.info(f"👑 Loaded {len(app.sudoers)} sudo users.")
         logger.info("\n🎉 Bot started successfully! Ready to play music! 🎵\n")
 
-        # Step 8: Keep the bot running (press Ctrl+C to stop)
+        # Keep running until Ctrl+C
         try:
             await idle()
         except KeyboardInterrupt:
@@ -78,7 +73,7 @@ async def main():
         except Exception as e:
             logger.error(f"Error during idle: {e}", exc_info=True)
         
-        # Step 9: Cleanup and shutdown when bot is stopped
+        # Cleanup
         await stop()
     except Exception as e:
         logger.error(f"Critical error in main: {e}", exc_info=True)

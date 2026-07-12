@@ -1,15 +1,8 @@
 # ==============================================================================
-# _play.py - Play Command Helper & Validator
+# _play.py - Play Command Validator
 # ==============================================================================
-# This file contains the @checkUB decorator used by play commands.
-# Validates:
-# - User permissions (only real users, not anonymous admins)
-# - Chat type (only supergroups)
-# - Command syntax (query or reply required)
-# - Queue limits
-# - YouTube URL validity
-#
-# This decorator ensures all play commands have proper validation before execution.
+# Provides the @checkUB decorator to make sure everything is valid before 
+# attempting to play a song (checks permissions, queue limits, chat type, etc).
 # ==============================================================================
 
 import asyncio
@@ -22,7 +15,7 @@ from HasiiMusic import app, config, db, queue, yt
 def checkUB(play):
     async def wrapper(_, m: types.Message):
         async def safe_reply(text):
-            """Safely send reply, return None if chat doesn't allow messages"""
+            # Fallback to prevent crashing if the bot doesn't have message permissions
             try:
                 return await m.reply_text(text)
             except (errors.ChatWriteForbidden, errors.ChatSendPlainForbidden):

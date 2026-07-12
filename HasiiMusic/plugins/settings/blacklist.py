@@ -1,19 +1,7 @@
 # ==============================================================================
-# blacklist.py - User/Chat Blacklist Commands (Sudo Only)
+# blacklist.py - Blacklisting
 # ==============================================================================
-# This plugin manages the bot blacklist to block abusive users/chats.
-# Blacklisted entities cannot use the bot.
-#
-# Commands:
-# - /blacklistchat [chat_id] - Add chat to blacklist
-# - /whitelistchat [chat_id] - Remove chat from blacklist
-# - /blacklistedchat - Show all blacklisted chats
-# 
-# - /block [user_id|@username] - Block user
-# - /unblock [user_id|@username] - Unblock user
-# - /blockedusers - Show all blocked users
-#
-# Only sudo users can manage the blacklist.
+# Sudo commands to block toxic users or spammy chats from using the bot entirely.
 # ==============================================================================
 
 from pyrogram import filters, types
@@ -26,7 +14,6 @@ from HasiiMusic import app, db, lang
 @app.on_message(filters.command(["blacklistchat"]) & app.sudo_filter)
 @lang.language()
 async def _blacklist_chat(_, m: types.Message):
-    """Add chat to blacklist."""
     # Auto-delete command message
     try:
         await m.delete()
@@ -63,7 +50,6 @@ async def _blacklist_chat(_, m: types.Message):
 @app.on_message(filters.command(["whitelistchat", "unblacklistchat"]) & app.sudo_filter)
 @lang.language()
 async def _whitelist_chat(_, m: types.Message):
-    """Remove chat from blacklist."""
     # Auto-delete command message
     try:
         await m.delete()
@@ -102,7 +88,6 @@ async def _whitelist_chat(_, m: types.Message):
 @app.on_message(filters.command(["blacklistedchat", "blchats"]) & app.sudo_filter)
 @lang.language()
 async def _blacklisted_chats(_, m: types.Message):
-    """Show all blacklisted chats."""
     # Auto-delete command message
     try:
         await m.delete()
@@ -137,7 +122,6 @@ async def _blacklisted_chats(_, m: types.Message):
 @app.on_message(filters.command(["block"]) & app.sudo_filter)
 @lang.language()
 async def _block_user(_, m: types.Message):
-    """Block a user from using the bot."""
     # Auto-delete command message
     try:
         await m.delete()
@@ -187,7 +171,6 @@ async def _block_user(_, m: types.Message):
 @app.on_message(filters.command(["unblock"]) & app.sudo_filter)
 @lang.language()
 async def _unblock_user(_, m: types.Message):
-    """Unblock a user."""
     # Auto-delete command message
     try:
         await m.delete()
@@ -233,7 +216,6 @@ async def _unblock_user(_, m: types.Message):
 @app.on_message(filters.command(["blockedusers", "blusers"]) & app.sudo_filter)
 @lang.language()
 async def _blocked_users(_, m: types.Message):
-    """Show all blocked users."""
     # Auto-delete command message
     try:
         await m.delete()

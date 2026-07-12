@@ -1,3 +1,9 @@
+# ==============================================================================
+# bots.py - Bot Scanner
+# ==============================================================================
+# Command to scan and list all bots currently residing in the group.
+# ==============================================================================
+
 from pyrogram import filters
 from pyrogram.types import Message
 from pyrogram.enums import ChatMembersFilter, ParseMode
@@ -7,7 +13,6 @@ from HasiiMusic import app
 
 @app.on_message(filters.command("bots") & filters.group)
 async def list_bots(client, message: Message):
-    """List all bots in the current group"""
     # Auto-delete command message
     try:
         await message.delete()

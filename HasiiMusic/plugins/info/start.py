@@ -1,11 +1,7 @@
 # ==============================================================================
-# start.py - Start Command and Basic Bot Interactions
+# start.py - Basics
 # ==============================================================================
-# This plugin handles:
-# - /start command (welcome message for new users)
-# - /help command (show help menu)
-# - /playmode or /settings command (group settings)
-# - New member detection (when bot joins a group)
+# Essential user-facing commands: /start, /help, /settings, etc.
 # ==============================================================================
 
 from pyrogram import enums, errors, filters, types
@@ -17,7 +13,6 @@ from HasiiMusic.helpers import buttons, utils
 @app.on_message(filters.command(["help"]) & filters.private & ~app.bl_users)
 @lang.language()
 async def _help(_, m: types.Message):
-    """Handle /help command in private chats - shows help menu with image."""
     # Auto-delete command message
     try:
         await m.delete()
@@ -43,14 +38,6 @@ async def _help(_, m: types.Message):
 @app.on_message(filters.command(["start"]))
 @lang.language()
 async def start(_, message: types.Message):
-    """
-    Handle /start command - welcome message for users.
-
-    - In private chat: Shows welcome message with inline buttons
-    - In group chat: Shows short welcome message
-    - Adds new users to database
-    - Sends log to logger group for new users
-    """
     # Auto-delete command message in group chats
     if message.chat.type != enums.ChatType.PRIVATE:
         try:
@@ -109,14 +96,6 @@ async def start(_, message: types.Message):
 @app.on_message(filters.command(["playmode", "settings"]) & filters.group & ~app.bl_users)
 @lang.language()
 async def settings(_, message: types.Message):
-    """
-    Handle /playmode or /settings command - show group settings.
-
-    Displays:
-    - Play mode (everyone or admin only)
-    - Current language
-    - Options to change settings
-    """
     # Auto-delete command message
     try:
         await message.delete()
@@ -138,12 +117,6 @@ async def settings(_, message: types.Message):
 @app.on_message(filters.new_chat_members, group=7)
 @lang.language()
 async def _new_member(_, message: types.Message):
-    """
-    Handle new member events - detect when bot is added to groups.
-
-    - Leaves non-supergroup chats
-    - Adds new groups to database
-    """
     # Only work in supergroups (not basic groups)
     if message.chat.type != enums.ChatType.SUPERGROUP:
         return await message.chat.leave()

@@ -1,9 +1,7 @@
 # ==============================================================================
-# example_radio.py - Radio Plugin Template
+# example_radio.py - Radio Template
 # ==============================================================================
-# This is a template file for creating custom radio streaming plugins.
-# You can implement your own radio station streaming functionality here.
-#
+# Template for adding custom live radio streams.
 # ==============================================================================
 
 

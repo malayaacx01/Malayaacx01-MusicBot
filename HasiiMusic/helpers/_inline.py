@@ -1,13 +1,7 @@
 # ==============================================================================
-# _inline.py - Inline Keyboard Button Builder
+# _inline.py - Keyboard Buttons
 # ==============================================================================
-# This file provides helper functions to create inline keyboard buttons.
-# Used to build:
-# - Playback control buttons (play, pause, skip, stop, etc.)
-# - Language selection menus
-# - Help menus and navigation
-# - Download cancel buttons
-# - Settings buttons
+# Helper methods to generate all the inline keyboards (play controls, help menus, etc).
 # ==============================================================================
 
 from pyrogram import types
@@ -84,7 +78,6 @@ class Inline:
     def help_markup(
         self, _lang: dict, back: bool = False
     ) -> types.InlineKeyboardMarkup:
-        """Create help menu with categorized buttons."""
         if back:
             rows = [
                 [

@@ -1,17 +1,7 @@
 # ==============================================================================
-# auth.py - Authorization Management Commands
+# auth.py - DJ Auth
 # ==============================================================================
-# This plugin manages authorized users who can control music playback.
-# Authorized users can use playback commands even if they're not admins.
-#
-# Commands:
-# - /auth <user> - Grant playback control permissions to user
-# - /unauth <user> - Revoke playback control permissions from user
-# - /authlist - Show the authorized users in the current chat
-# - /admincache - Reload admin list cache for current chat
-# - /reload - Same as /admincache
-#
-# Only group admins can add/remove authorized users.
+# Give specific users permission to skip and control music without making them group admins.
 # ==============================================================================
 
 import time
@@ -51,7 +41,6 @@ async def _auth(_, m: types.Message):
 @lang.language()
 @admin_check
 async def _authlist(_, m: types.Message):
-    """Display the authorized users for the chat."""
     auth_users = await db._get_auth(m.chat.id)
     if not auth_users:
         return await utils.safe_text(m, m.lang["auth_empty"])

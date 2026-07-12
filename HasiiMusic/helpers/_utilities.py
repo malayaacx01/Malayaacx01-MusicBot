@@ -1,14 +1,7 @@
 # ==============================================================================
-# _utilities.py - General Utility Functions
+# _utilities.py - Utils
 # ==============================================================================
-# This file contains various helper functions used throughout the bot:
-# - Time formatting (ETA, duration)
-# - File size formatting (bytes to KB/MB/GB)
-# - User extraction from messages (mentions, replies, user IDs)
-# - Duration conversion (mm:ss to seconds)
-# - Message text extraction
-#
-# These utilities keep code DRY (Don't Repeat Yourself) across plugins.
+# Grab bag of helper functions: time formatting, user extraction, safe sending.
 # ==============================================================================
 
 import re
@@ -40,7 +33,6 @@ class Utilities:
             return f"{bytes / 1024:.2f} KB"
 
     def format_duration(self, seconds: int) -> str:
-        """Format duration as HH:MM:SS or MM:SS depending on length."""
         if seconds >= 3600:  # 1 hour or more
             hours = seconds // 3600
             minutes = (seconds % 3600) // 60
@@ -96,7 +88,6 @@ class Utilities:
         await app.send_message(chat_id=app.logger, text=_text)
 
     async def send_log(self, m: types.Message) -> None:
-        """Log new user to logger group when they start the bot in private chat."""
         await app.send_message(
             chat_id=app.logger,
             text=m.lang["log_user"].format(
@@ -114,7 +105,6 @@ class Utilities:
         reply_markup=None,
         quote: bool | None = True,
     ) -> types.Message | None:
-        """Send text but gracefully fallback to media-only chats."""
         if not message:
             return None
         try:
@@ -146,7 +136,6 @@ class Utilities:
         *,
         reply_markup=None,
     ) -> bool:
-        """Edit text or caption safely depending on message type."""
         if not message:
             return False
         try:

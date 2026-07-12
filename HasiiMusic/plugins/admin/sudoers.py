@@ -1,15 +1,7 @@
 # ==============================================================================
-# sudoers.py - Sudo User Management (Owner Only)
+# sudoers.py - Sudo Management
 # ==============================================================================
-# This plugin allows the bot owner to add/remove sudo users.
-# Sudo users have elevated permissions and can use admin commands.
-#
-# Commands:
-# - /addsudo <user> - Grant sudo permissions
-# - /delsudo <user> - Revoke sudo permissions
-# - /rmsudo <user> - Same as /delsudo
-#
-# Only the bot owner (defined in config) can manage sudo users.
+# Manage the list of sudo users who can run global bot commands.
 # ==============================================================================
 
 from pyrogram import filters, types
