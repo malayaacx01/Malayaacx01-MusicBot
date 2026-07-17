@@ -1,6 +1,6 @@
 # 🏗 Technical Architecture & Libraries
 
-Welcome to the technical documentation for **HasiiMusicBot**. This document explains the core Python libraries used to build this bot, their roles, and how they interact to provide a seamless music streaming experience in Telegram voice chats.
+Welcome to the technical documentation for **Malayaacx01-MusicBot**. This document explains the core Python libraries used to build this bot, their roles, and how they interact to provide a seamless music streaming experience in Telegram voice chats.
 
 ---
 
@@ -8,21 +8,21 @@ Welcome to the technical documentation for **HasiiMusicBot**. This document expl
 
 ### 1. Pyrogram (Telegram MTProto Framework)
 [Pyrogram](https://docs.pyrogram.org/) is a modern, elegant, and asynchronous MTProto API framework for Telegram.
-* **Role in HasiiMusicBot:** Pyrogram acts as the central brain of the bot. It is responsible for handling all incoming messages, commands (e.g., `/play`, `/skip`), inline queries, and button callbacks.
-* **Implementation:** Mostly configured in `HasiiMusic/core/bot.py` and `HasiiMusic/core/telegram.py`. 
+* **Role in Malayaacx01-MusicBot:** Pyrogram acts as the central brain of the bot. It is responsible for handling all incoming messages, commands (e.g., `/play`, `/skip`), inline queries, and button callbacks.
+* **Implementation:** Mostly configured in `Malayaacx01-MusicBot/core/bot.py` and `Malayaacx01-MusicBot/core/telegram.py`. 
 * **Assistant Account:** We utilize a Pyrogram String Session to host an "Assistant" userbot. Telegram does not allow standard bots to play audio in voice chats natively. Therefore, this Assistant Account acts on behalf of the bot to join the voice chat and stream the audio.
 
 ### 2. PyTgCalls (Voice Chat Streaming API)
 [PyTgCalls](https://pytgcalls.github.io/PyTgCalls/) is a powerful asynchronous Python library for handling Telegram Group Voice Calls.
-* **Role in HasiiMusicBot:** While Pyrogram handles the text and UI logic, PyTgCalls is entirely responsible for the audio processing and streaming. It connects the Assistant Account to the Telegram Voice Chat via WebRTC.
-* **Implementation:** Managed centrally in `HasiiMusic/core/calls.py`. It natively handles audio queues, pausing, resuming, and muting the stream directly inside the active voice chat.
+* **Role in Malayaacx01-MusicBot:** While Pyrogram handles the text and UI logic, PyTgCalls is entirely responsible for the audio processing and streaming. It connects the Assistant Account to the Telegram Voice Chat via WebRTC.
+* **Implementation:** Managed centrally in `Malayaacx01-MusicBot/core/calls.py`. It natively handles audio queues, pausing, resuming, and muting the stream directly inside the active voice chat.
 
 ### 3. yt-dlp & FFmpeg (Media Extraction & Processing)
-* **yt-dlp:** We use `yt-dlp` (located in `HasiiMusic/core/youtube.py`) to bypass the need to download entire videos. Instead, it extracts the direct high-quality audio stream URLs (like Opus/WebM) from YouTube and other platforms.
+* **yt-dlp:** We use `yt-dlp` (located in `Malayaacx01-MusicBot/core/youtube.py`) to bypass the need to download entire videos. Instead, it extracts the direct high-quality audio stream URLs (like Opus/WebM) from YouTube and other platforms.
 * **FFmpeg:** Acts as the backend engine. `PyTgCalls` utilizes FFmpeg to transcode these media streams on-the-fly into a format compatible with Telegram Voice Chats (Raw Audio/PCM).
 
 ### 4. Motor (Asynchronous MongoDB)
-* **Role in HasiiMusicBot:** To maintain the asynchronous nature of the bot, we use `Motor` (in `HasiiMusic/core/mongo.py`) for all database interactions. This ensures that saving and retrieving data (like broadcast lists, banned users, and chat settings) does not block the main event loop, keeping the bot fast and responsive.
+* **Role in Malayaacx01-MusicBot:** To maintain the asynchronous nature of the bot, we use `Motor` (in `Malayaacx01-MusicBot/core/mongo.py`) for all database interactions. This ensures that saving and retrieving data (like broadcast lists, banned users, and chat settings) does not block the main event loop, keeping the bot fast and responsive.
 
 ---
 
