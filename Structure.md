@@ -1,4 +1,4 @@
-# 📁 ˹ʜᴀꜱɪɪ ᴍᴜꜱɪᴄ˼ Project Structure
+# 📁 ˹Malayaacx01-MusicBot˼ Project Structure
 
 This document provides a comprehensive overview of the project structure, explaining the purpose of each folder and key files.
 
@@ -46,11 +46,11 @@ This document provides a comprehensive overview of the project structure, explai
 
 ---
 
-## 📦 HasiiMusic/ - Main Application Package
+## 📦 Malayaacx01-MusicBot/ - Main Application Package
 
 The core bot application containing all functionality.
 
-### 🔧 HasiiMusic/core/ - Core Components
+### 🔧 Malayaacx01-MusicBot/core/ - Core Components
 
 Contains the fundamental building blocks of the bot.
 
@@ -74,7 +74,7 @@ Contains the fundamental building blocks of the bot.
 
 ---
 
-### 🔌 HasiiMusic/plugins/ - Command Handlers
+### 🔌 Malayaacx01-MusicBot/plugins/ - Command Handlers
 
 All bot commands and event handlers, organized by category.
 
@@ -184,7 +184,7 @@ All bot commands and event handlers, organized by category.
 
 ---
 
-### 🛠️ HasiiMusic/helpers/ - Helper Functions
+### 🛠️ Malayaacx01-MusicBot/helpers/ - Helper Functions
 
 Utility functions used throughout the bot.
 
@@ -205,7 +205,7 @@ Utility functions used throughout the bot.
 
 ---
 
-### 🌍 HasiiMusic/locales/ - Message Strings
+### 🌍 Malayaacx01-MusicBot/locales/ - Message Strings
 
 Bot message strings in JSON format.
 
@@ -226,7 +226,7 @@ Bot message strings in JSON format.
 
 ---
 
-### 🍪 HasiiMusic/cookies/ - YouTube Cookies
+### 🍪 Malayaacx01-MusicBot/cookies/ - YouTube Cookies
 
 Storage for YouTube authentication cookies.
 
@@ -236,7 +236,7 @@ Storage for YouTube authentication cookies.
 
 ---
 
-### 🚀 HasiiMusic/**main**.py - Entry Point
+### 🚀 Malayaacx01-MusicBot/**main**.py - Entry Point
 
 Main application entry point that:
 
@@ -250,7 +250,7 @@ Main application entry point that:
 
 ---
 
-### 📦 HasiiMusic/**init**.py - Package Initialization
+### 📦 Malayaacx01-MusicBot/**init**.py - Package Initialization
 
 Initializes and exports core components:
 
@@ -550,11 +550,11 @@ When adding new features:
 
 ## 📞 Support
 
-- **Support Channel:** [TheInfinityAI](https://t.me/TheInfinityAI)
-- **Developer:** [Hasindu Lakshan](https://t.me/Hasindu_Lakshan)
+- **Support Channel:** [Malayaacx01 Shop - Channal](https://t.me/+-QOgTTnwydw4MzE1)
+- **Developer:** [Malayaacx01 - Shop | Ajis - Shop](https://t.me/Malayaacx_2601)
 
 ---
 
 ---
 
-**Last Updated:** March 4, 2026
+**Last Updated:** July 17, 2026
