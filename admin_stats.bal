@@ -4,7 +4,7 @@ import ballerinax/mongodb;
 // This is the main function where the program starts running.
 public function main() returns error? {
     // Print a starting message to the terminal.
-    io:println("Connecting to HasiiMusicBot Database...");
+    io:println("Connecting to Malayaacx01-MusicBot Database...");
 
     // Read the .env file to get the MongoDB URI securely
     string[] envLines = check io:fileReadLines(".env");
@@ -43,7 +43,7 @@ public function main() returns error? {
 
     // Print the final result in a beautiful format to the terminal screen.
     io:println("\n==============================");
-    io:println("   HasiiMusicBot Statistics   ");
+    io:println("   Malayaacx01-MusicBot Statistics   ");
     io:println("==============================");
     io:println("👥 Total Users : ", totalUsers);
     io:println("💬 Total Groups: ", totalChats);
